@@ -1,0 +1,93 @@
+<h2>מה מבנה האתר?</h2>
+<p class="subtitle">כל גישה נותנת חוויה שונה למי שמגיע לאתר שלך</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="singlepage" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:16px; min-height:220px; font-family:monospace;">
+      <div style="color:#333; font-size:9px; margin-bottom:12px;">── scroll down ──────────────────</div>
+
+      <div style="border-left:1px solid #222; padding-left:12px; margin-bottom:10px;">
+        <div style="color:#fff; font-size:11px; margin-bottom:2px;">Hero</div>
+        <div style="color:#444; font-size:9px;">Leon Penkovich · Sr. Product Designer</div>
+      </div>
+
+      <div style="border-left:1px solid #222; padding-left:12px; margin-bottom:10px;">
+        <div style="color:#fff; font-size:11px; margin-bottom:2px;">Work</div>
+        <div style="display:flex; gap:6px;">
+          <div style="background:#1a1a1a; width:50px; height:30px; border-radius:2px;"></div>
+          <div style="background:#1a1a1a; width:50px; height:30px; border-radius:2px;"></div>
+        </div>
+      </div>
+
+      <div style="border-left:1px solid #222; padding-left:12px; margin-bottom:10px;">
+        <div style="color:#fff; font-size:11px; margin-bottom:2px;">About</div>
+        <div style="height:4px; background:#1a1a1a; border-radius:2px; width:80%;"></div>
+      </div>
+
+      <div style="border-left:1px solid #222; padding-left:12px;">
+        <div style="color:#fff; font-size:11px;">Contact</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Single Page Scroll</h3>
+      <p>הכל בעמוד אחד. גולל למטה: Hero → Work → About → Contact. מהיר, ישיר, קל לשלוח. פופולרי מאוד בפורטפוליו מינימליסטי.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="multipage" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:16px; min-height:220px; font-family:monospace;">
+      <div style="color:#444; font-size:9px; margin-bottom:12px;">page: / (index)</div>
+
+      <div style="background:#111; border-radius:4px; padding:10px; margin-bottom:8px; cursor:pointer;">
+        <div style="color:#fff; font-size:10px;">01 — Wizecare</div>
+        <div style="color:#444; font-size:9px;">Digital Health → <span style="color:#555;">wizecare/</span></div>
+      </div>
+
+      <div style="background:#111; border-radius:4px; padding:10px; margin-bottom:12px; cursor:pointer;">
+        <div style="color:#fff; font-size:10px;">02 — Totango</div>
+        <div style="color:#444; font-size:9px;">SaaS Platform → <span style="color:#555;">totango/</span></div>
+      </div>
+
+      <div style="color:#333; font-size:9px; margin-bottom:6px;">page: /wizecare</div>
+      <div style="background:#0d0d0d; border:1px solid #1a1a1a; border-radius:4px; padding:10px;">
+        <div style="color:#666; font-size:9px;">Case study full page</div>
+        <div style="height:3px; background:#1a1a1a; border-radius:2px; margin-top:6px; width:60%;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Multi-Page</h3>
+      <p>עמוד index קצר עם 2 קייס-סטאדי, כל אחד פותח עמוד נפרד. URLs נקיים, קל לקישור ישיר לקייס סטאדי ספציפי. כמו אתר אמיתי.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:16px; min-height:220px; font-family:monospace;">
+      <div style="color:#444; font-size:9px; margin-bottom:10px;">/ — landing (קצר)</div>
+
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <div style="color:#fff; font-size:24px; font-weight:200;">LP</div>
+        <div style="flex:1; height:1px; background:#1a1a1a;"></div>
+        <div style="color:#444; font-size:9px;">↓ scroll</div>
+      </div>
+
+      <div style="border:1px solid #1a1a1a; border-radius:4px; padding:8px; margin-bottom:6px;">
+        <div style="color:#666; font-size:9px; margin-bottom:4px;">WIZECARE ↗</div>
+        <div style="height:40px; background:#111; border-radius:2px;"></div>
+      </div>
+
+      <div style="color:#333; font-size:9px; text-align:center; margin:4px 0;">▼ case study continues inline ▼</div>
+
+      <div style="border:1px dashed #1a1a1a; border-radius:4px; padding:6px;">
+        <div style="color:#555; font-size:9px;">Background · Problem · Research · Results</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hybrid (Landing + Expand)</h3>
+      <p>Landing קצר מאוד עם preview, הקייס סטאדי מתרחב inline או נפתח כ-modal. מרגיש חכם ומעניין, אבל יותר מורכב לבנות.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:20px; font-size:12px; text-align:center;">בחר את מה שמרגיש נכון — http://localhost:51517</p>

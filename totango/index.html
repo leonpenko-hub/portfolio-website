@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Totango — Leon Penkovich</title>
+  <meta name="description" content="Modular widget-based dashboard redesign for a leading Customer Success SaaS platform. Case study by Leon Penkovich.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="light">
+
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">Leon Penkovich</a>
+      <div class="nav-right">
+        <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+          <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="nav-toggle-track"><span class="nav-toggle-thumb"></span></span>
+          <span class="nav-toggle-icon moon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/#work">Work</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <a class="cs-back" href="/">← All work</a>
+
+    <header class="cs-hero">
+      <p class="cs-index">Case Study 02</p>
+      <h1 class="cs-title">Totango — Role-Driven<br>Portfolio Redesign</h1>
+      <p class="cs-subtitle">
+        Transforming a one-size-fits-all Customer Success dashboard into a modular, widget-based system adapted for every CSM role — reducing support tickets by 85% and cutting adoption time in half.
+      </p>
+      <div class="cs-meta">
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">My Role</p>
+          <p class="cs-meta-value">Lead Product Designer · UX Researcher</p>
+        </div>
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">Industry</p>
+          <p class="cs-meta-value">B2B SaaS · Customer Success</p>
+        </div>
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">Impact</p>
+          <p class="cs-meta-value">−85% support tickets · 4.6 CSAT</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="cs-body">
+
+      <!-- Background -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">01</span>
+          <span class="cs-section-title">Background</span>
+        </div>
+        <h2 class="cs-h2">What is Totango?</h2>
+        <p class="cs-p">
+          Totango is a SaaS platform that empowers CSM teams and managers to design and build customer success journeys — from onboarding to renewal — so they can measure performance, scale operations, and proactively prevent churn before customers disengage. A self-service platform that makes customer success approachable for businesses of any size or industry.
+        </p>
+        <img class="cs-img" src="../images/totango-old-vs-new.jpg" alt="Totango old vs new design">
+        <h2 class="cs-h2" style="margin-top: 40px;">Main Goal</h2>
+        <p class="cs-p">
+          Unify the platform for all CSM roles with a modernized, smoother user experience and consistent onboarding and adoption flow — reducing support load and feature requests while increasing CSAT and customer advocacy.
+        </p>
+        <p class="cs-p" style="margin-top: 16px;">
+          As Lead Designer, I partnered with PMs to modernize the design system, improve usability across CSM roles, and design a streamlined experience based on user research — all within limited engineering resources.
+        </p>
+      </section>
+
+      <!-- Problem -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">02</span>
+          <span class="cs-section-title">Problem Statements</span>
+        </div>
+        <h2 class="cs-h2">Two compounding problems</h2>
+        <div class="problem-grid">
+
+          <div class="problem-card">
+            <p class="problem-num">01</p>
+            <p class="problem-title">Adoption Drift</p>
+            <p class="problem-body">
+              Letting users set their own homepage created inconsistent entry points. Many skipped the intended "My Portfolio" flow, leading to confusion, lower adoption, and a flood of support tickets and off-track feature requests.
+            </p>
+            <p class="problem-who">Affected: CSMs, Engineers, New users</p>
+          </div>
+
+          <div class="problem-card">
+            <p class="problem-num">02</p>
+            <p class="problem-title">Fragmented Needs, Unscalable Demand</p>
+            <p class="problem-body">
+              CSMs work in diverse contexts — from enterprise teams handling one account to SMB CSMs managing regions and overlapping roles. The current experience wasn't adaptable, driving ongoing feature requests and rising support load.
+            </p>
+            <p class="problem-who">Affected: Enterprise, Regional, Cross-functional CSMs</p>
+          </div>
+
+        </div>
+
+        <div class="quote-block" style="margin-top: 36px;">
+          <p class="quote-text">"I manage over 40 client accounts, each at a different stage. I need quick visibility into risks and progress, not a generic overview."</p>
+          <p class="quote-attr">Arjun Mehta, Mid-Market CSM — Revio CRM</p>
+        </div>
+
+        <div class="quote-block">
+          <p class="quote-text">"My homepage is cluttered with data I don't use. Can we make widgets or sections customizable per user?"</p>
+          <p class="quote-attr">Ilay Bernand, SMB CSM — Cloudly</p>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">03</span>
+          <span class="cs-section-title">Research</span>
+        </div>
+        <h2 class="cs-h2">Mapping CSM role diversity</h2>
+        <p class="cs-p">
+          Conducted qualitative interviews and workflow observations across industries and company sizes to map how different CSM roles operate — identifying key patterns and pain points driving the redesign.
+        </p>
+        <ul class="research-list">
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text"><strong style="color: var(--fg); font-weight: 400;">Enterprise CSM Lead (SAP)</strong> — Needs single-account focus; current view adds noise for global clients managing multiple teams</p>
+          </li>
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text"><strong style="color: var(--fg); font-weight: 400;">Mid-Market CSM (Revio CRM)</strong> — Needs scalable visibility and prioritization; managing 40+ accounts with no quick risk overview</p>
+          </li>
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text"><strong style="color: var(--fg); font-weight: 400;">SMB CSM (Cloudly Analytics)</strong> — Needs customizable views; generic dashboard isn't actionable for varying client types</p>
+          </li>
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text"><strong style="color: var(--fg); font-weight: 400;">Regional CSM Manager (Siemens)</strong> — Needs regional segmentation; filtering irrelevant regions wastes time and slows performance tracking</p>
+          </li>
+        </ul>
+
+        <p class="cs-p" style="margin-top: 32px;">
+          Competitive benchmarking across leading SaaS dashboards revealed a clear pattern: short onboarding or role-query auto-generates a tailored workspace. Users can add, remove, or resize widgets. The best systems evolve through ongoing testing and data-driven adjustments.
+        </p>
+      </section>
+
+      <!-- Execution -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">04</span>
+          <span class="cs-section-title">Execution</span>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 01</p>
+          <h3 class="step-title">Scope Definition — Why "My Portfolio" First</h3>
+          <p class="step-body">
+            "My Portfolio" is the primary landing page every CSM interacts with daily. It contains account health, tasks, risks, and notifications in one view — and connects to all key areas of Totango. Starting here ensured immediate value and a strong foundation for scaling the widget system across the platform.
+          </p>
+          <img class="cs-img" src="../images/totango-old-vs-new.jpg" alt="Old vs new My Portfolio design">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 02</p>
+          <h3 class="step-title">Widget Library — Building Blocks in One View</h3>
+          <p class="step-body">
+            Transformed the static "My Portfolio" into a dynamic, widget-based layout. Defined core widgets by summarizing existing features and usage patterns. Placed new widgets within the existing layout to ease adaptation and reduce cognitive friction. Each widget was assessed for data value and space efficiency to keep every element purposeful.
+          </p>
+          <img class="cs-img" src="../images/totango-widget-library.jpg" alt="Widget library overview">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 03</p>
+          <h3 class="step-title">Scalable Widget Framework</h3>
+          <p class="step-body">
+            Each widget was designed in four scalable formats — 4/4, 3/4, 2/4, 1/4. Progressive disclosure adjusts data visibility per scale (drill-in, dropdown, tooltip), while data consistency is maintained across all versions for smooth reuse. Shared components were established for future use inside Account Profile pages.
+          </p>
+          <img class="cs-img" src="../images/totango-widget-framework.jpg" alt="Widget scaling framework">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 04</p>
+          <h3 class="step-title">Role-Driven Portfolio Layouts</h3>
+          <p class="step-body">
+            The same widget system adapts to different CSM roles automatically. For Multi-Account CSMs, the layout prioritizes notifications and account health at the top. For Task-Focused CSMs, today's and weekly tasks are emphasized for immediate action, with notifications placed below to reduce distraction.
+          </p>
+          <img class="cs-img" src="../images/totango-role-layouts.jpg" alt="Role-driven portfolio layouts">
+        </div>
+
+      </section>
+
+      <!-- Results -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">05</span>
+          <span class="cs-section-title">Measured Success</span>
+        </div>
+        <h2 class="cs-h2">Impact &amp; achievements</h2>
+        <p class="cs-p">The same widget components were reused inside the Account Profile page, reducing engineering effort and implementation time.</p>
+
+        <div class="metrics-grid">
+          <div class="metric">
+            <p class="metric-value">−35%</p>
+            <p class="metric-label">Reduction in new-user adoption time</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">−85%</p>
+            <p class="metric-label">Fewer support tickets</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">~50%</p>
+            <p class="metric-label">Decrease in implementation time via widget reuse</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">4.6</p>
+            <p class="metric-label">CSAT score for the new "My Portfolio" experience</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="cs-nav-footer">
+      <a class="cs-nav-link" href="../wizecare/">
+        <span class="cs-nav-direction">← Previous case study</span>
+        <span class="cs-nav-name">Wizecare</span>
+        <span class="cs-nav-desc">Digital Health Platform</span>
+      </a>
+      <a class="cs-nav-link next" href="/">
+        <span class="cs-nav-direction">Back to work →</span>
+        <span class="cs-nav-name">All Projects</span>
+        <span class="cs-nav-desc">Homepage</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>© 2026 Leon Penkovich · All rights reserved</span>
+      <span>Sr. Product Designer &amp; UX Architect</span>
+    </footer>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">×</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/chat.js"></script>
+  <script>
+    const overlay = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('.cs-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function close() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<h2>Layout דף הבית — איזה מבנה?</h2>
+<p class="subtitle">כולם minimal/dark, ההבדל הוא מה רואים ראשון ואיך הקייס-סטאדיס מוצגים</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="type-first" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:20px; min-height:240px; font-family:'Georgia',serif; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+        <div style="color:#fff; font-size:11px; letter-spacing:1px;">LP</div>
+        <div style="display:flex; gap:20px;">
+          <span style="color:#444; font-size:10px;">Work</span>
+          <span style="color:#444; font-size:10px;">About</span>
+        </div>
+      </div>
+      <div style="margin-bottom:36px;">
+        <div style="color:#fff; font-size:22px; font-weight:300; line-height:1.3; margin-bottom:6px;">Senior Product Designer<br>&amp; UX Architect</div>
+        <div style="color:#555; font-size:10px; letter-spacing:1px;">leon.penko@gmail.com</div>
+      </div>
+      <div style="border-top:1px solid #1a1a1a; padding-top:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div style="color:#666; font-size:9px; letter-spacing:2px;">01</div>
+          <div style="color:#fff; font-size:11px;">Wizecare — Digital Health</div>
+          <div style="color:#444; font-size:9px;">↗</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="color:#666; font-size:9px; letter-spacing:2px;">02</div>
+          <div style="color:#fff; font-size:11px;">Totango — SaaS Platform</div>
+          <div style="color:#444; font-size:9px;">↗</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Typography First</h3>
+      <p>כותרת גדולה → רשימת קייס-סטאדיס כטקסט. נקי מאוד, ישיר, Editorial. הכי קרוב ל-Notion/Linear feel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="card-grid" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:20px; min-height:240px; font-family:sans-serif; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;">
+        <div style="color:#fff; font-size:11px; letter-spacing:1px;">LP</div>
+        <div style="display:flex; gap:20px;">
+          <span style="color:#444; font-size:10px;">Work</span>
+          <span style="color:#444; font-size:10px;">About</span>
+        </div>
+      </div>
+      <div style="margin-bottom:28px;">
+        <div style="color:#fff; font-size:20px; font-weight:300; margin-bottom:4px;">Leon Penkovich</div>
+        <div style="color:#555; font-size:10px;">Sr. Product Designer & UX Architect</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div style="background:#111; border-radius:4px; padding:12px; border:1px solid #1a1a1a;">
+          <div style="height:30px; background:#1a1a1a; border-radius:2px; margin-bottom:8px;"></div>
+          <div style="color:#fff; font-size:9px; margin-bottom:2px;">Wizecare</div>
+          <div style="color:#444; font-size:8px;">Digital Health</div>
+        </div>
+        <div style="background:#111; border-radius:4px; padding:12px; border:1px solid #1a1a1a;">
+          <div style="height:30px; background:#1a1a1a; border-radius:2px; margin-bottom:8px;"></div>
+          <div style="color:#fff; font-size:9px; margin-bottom:2px;">Totango</div>
+          <div style="color:#444; font-size:8px;">SaaS Platform</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Card Grid</h3>
+      <p>שם + תיאור קצר → כרטיסי קייס-סטאדי עם thumbnail. נראה יותר כמו פורטפוליו קלאסי. קל לסרוק, ברור.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="fullscreen-hero" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a; padding:20px; min-height:240px; font-family:sans-serif; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:auto;">
+        <div style="color:#fff; font-size:11px; letter-spacing:1px;">LP</div>
+        <div style="display:flex; gap:20px;">
+          <span style="color:#444; font-size:10px;">Work</span>
+          <span style="color:#444; font-size:10px;">About</span>
+        </div>
+      </div>
+      <div style="margin:auto 0;">
+        <div style="color:#333; font-size:9px; letter-spacing:3px; margin-bottom:10px;">PRODUCT DESIGNER</div>
+        <div style="color:#fff; font-size:28px; font-weight:200; line-height:1.2; margin-bottom:16px;">I design things<br>that actually work.</div>
+        <div style="color:#444; font-size:10px;">↓ See work</div>
+      </div>
+      <div style="border-top:1px solid #1a1a1a; padding-top:10px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="color:#555; font-size:9px;">01 — Wizecare</div>
+        <div style="color:#555; font-size:9px;">02 — Totango</div>
+        <div style="color:#333; font-size:9px;">↗</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Fullscreen Hero</h3>
+      <p>Statement גדול שתופס את כל המסך, קייס-סטאדיס בbar תחתון. מרשים בפתיחה, אבל דורש גלילה להגיע לתוכן.</p>
+    </div>
+  </div>
+
+</div>

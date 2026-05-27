@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wizecare — Leon Penkovich</title>
+  <meta name="description" content="Personalized remote physical therapy platform. Product design, UX research, and product management case study by Leon Penkovich.">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>body { background: var(--bg); }</style>
+</head>
+<body class="light">
+
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">Leon Penkovich</a>
+      <div class="nav-right">
+        <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+          <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="nav-toggle-track"><span class="nav-toggle-thumb"></span></span>
+          <span class="nav-toggle-icon moon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/#work">Work</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <a class="cs-back" href="/">← All work</a>
+
+    <header class="cs-hero">
+      <p class="cs-index">Case Study 01</p>
+      <h1 class="cs-title">Wizecare — Personalized<br>Remote Physical Therapy</h1>
+      <p class="cs-subtitle">
+        A digital health platform enabling physical therapists to treat and monitor patients remotely — from a Microsoft Kinect prototype to adoption across major HMOs.
+      </p>
+      <div class="cs-meta">
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">My Role</p>
+          <p class="cs-meta-value">Product Designer · UX Researcher · Product Manager</p>
+        </div>
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">Industry</p>
+          <p class="cs-meta-value">Digital Health</p>
+        </div>
+        <div class="cs-meta-item">
+          <p class="cs-meta-label">Impact</p>
+          <p class="cs-meta-value">~6,000 patients · 5 new market competitors</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="cs-body">
+
+      <!-- Background -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">01</span>
+          <span class="cs-section-title">Background</span>
+        </div>
+        <h2 class="cs-h2">What is Wizecare?</h2>
+        <p class="cs-p">
+          WizeCare is a digital health platform that enables physical therapists to treat and monitor patients remotely, while patients can access guided therapy anytime and anywhere. The idea originated with the use of the Microsoft Kinect camera and its skeleton tracking technology to analyze patient movement and posture — an innovation that evolved into a comprehensive platform adopted by leading HMOs worldwide.
+        </p>
+        <img class="cs-img" src="../images/wizecare-title.jpg" alt="Wizecare platform overview">
+        <h2 class="cs-h2" style="margin-top: 40px;">Main Goal</h2>
+        <p class="cs-p">
+          Building a platform that helps PTs manage larger caseloads efficiently, reduce unnecessary rehab costs, and strengthen patient trust through transparent progress tracking and tailored exercise programs.
+        </p>
+        <p class="cs-p" style="margin-top: 16px;">
+          As both Product Designer and PM, I designed the flows, MVP, and GA release while leading strategy and roadmap. I validated with PTs and patients, and drove Product-Led Growth through CSAT feedback loops.
+        </p>
+      </section>
+
+      <!-- Problem -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">02</span>
+          <span class="cs-section-title">Problem Statements</span>
+        </div>
+        <h2 class="cs-h2">Three problems driving the design</h2>
+        <div class="problem-grid">
+
+          <div class="problem-card">
+            <p class="problem-num">01</p>
+            <p class="problem-title">Insurance Exposed to Rehab Fraud</p>
+            <p class="problem-body">
+              Insurance companies pay for PT sessions without being able to verify whether claimed rehab hours were truly necessary — creating fraud risk and financial losses.
+            </p>
+            <p class="problem-who">Affected: Insurance companies</p>
+          </div>
+
+          <div class="problem-card">
+            <p class="problem-num">02</p>
+            <p class="problem-title">Adherence Gap in Physical Therapy</p>
+            <p class="problem-body">
+              Most rehab (70–80%) happens outside the clinic, yet up to 65% of patients don't follow their programs. This leads to misreporting, longer recovery, and disputes with insurers.
+            </p>
+            <p class="problem-who">Affected: Physical therapists, patients</p>
+          </div>
+
+          <div class="problem-card">
+            <p class="problem-num">03</p>
+            <p class="problem-title">Limited Visibility Beyond the Clinic</p>
+            <p class="problem-body">
+              Clinic managers struggle to monitor the full rehab journey. Unmonitored processes lead to patient complaints, lower satisfaction, and financial losses.
+            </p>
+            <p class="problem-who">Affected: Clinic managers, patients</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">03</span>
+          <span class="cs-section-title">Research</span>
+        </div>
+        <h2 class="cs-h2">Contextual Inquiry + Stakeholder Interviews</h2>
+        <p class="cs-p">
+          Conducted research across Israeli HMOs (Maccabi, Meuhedet), private clinics, and U.S. online sessions — covering clinic managers, PTs across specialties, and diverse patient groups.
+        </p>
+        <ul class="research-list">
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text">Observed therapists' daily tasks — assessments, rehab planning, documentation — and mapped digital workflows to identify adoption barriers</p>
+          </li>
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text">Learned that the full patient rehab journey is the common ground across all PT workflows, not the dashboard</p>
+          </li>
+          <li class="research-item">
+            <div class="research-dot"></div>
+            <p class="research-text">Identified four key UX challenges: low trust in technology, time-constrained interactions, app felt unnatural, and need for immediate clinic insights</p>
+          </li>
+        </ul>
+
+        <div class="quote-block" style="margin-top: 36px;">
+          <p class="quote-text">"I oversee many patients and therapists, but once rehab leaves the clinic, I lose visibility. When issues come up, it always falls back on us."</p>
+          <p class="quote-attr">Natalie G., Physical Therapist</p>
+        </div>
+
+        <div class="quote-block">
+          <p class="quote-text">"I spend too much time repeating redundant assessments, and irrelevant questions only slow the process."</p>
+          <p class="quote-attr">Richard P. Smith, Physical Therapist</p>
+        </div>
+      </section>
+
+      <!-- Execution -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">04</span>
+          <span class="cs-section-title">Execution</span>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 01</p>
+          <h3 class="step-title">Prioritization Matrix</h3>
+          <p class="step-body">
+            Served as both PM and Designer. Conducted competitive research and built a prioritization matrix to define MVP scope and the future roadmap — balancing essential features (patient management, assessment flow, data-driven plans) against nice-to-haves.
+          </p>
+          <img class="cs-img" src="../images/wizecare-assessment.jpg" alt="Patient assessment flow">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 02</p>
+          <h3 class="step-title">User Flow</h3>
+          <p class="step-body">
+            Translated strategic decisions into a clear experience path. The flow validates task order, exposes friction points early, and bridges strategy to data architecture — defining what information supports each step before touching structure.
+          </p>
+          <img class="cs-img" src="../images/wizecare-patients-list.jpg" alt="Patients list and management">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 03</p>
+          <h3 class="step-title">Data Architecture</h3>
+          <p class="step-body">
+            Structured the system's information hierarchy to define how patient data, assessments, and treatment plans connect across modules — ensuring consistency, scalability, and smooth data flow between users and features.
+          </p>
+          <img class="cs-img" src="../images/wizecare-patient-detail.jpg" alt="Patient detail view">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 04</p>
+          <h3 class="step-title">Patient Management — Core Experience</h3>
+          <p class="step-body">
+            The first screen designed — intentionally, not by convention. Research showed patient management is the most frequently used and impactful area in a PT's daily workflow. Designed like a Gmail-style inbox, surfacing patients who need attention first. Each patient card provides key details at a glance, with deeper context and actions available without losing focus.
+          </p>
+          <img class="cs-img" src="../images/wizecare-patients-list.jpg" alt="Patient management screen">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 05</p>
+          <h3 class="step-title">Dashboard &amp; KPIs</h3>
+          <p class="step-body">
+            Five key KPIs summarize clinic performance — from overdue tasks and feedback to coverage efficiency — all customizable by user role for PTs or clinic managers. The Agenda section drives the therapist's daily workflow with a clear view of upcoming sessions.
+          </p>
+          <img class="cs-img" src="../images/wizecare-dashboard.jpg" alt="Dashboard and KPIs">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 06</p>
+          <h3 class="step-title">Rehab Studio — Plan Builder</h3>
+          <p class="step-body">
+            Smart filtering replaces complex multi-parameter searches with data-driven insights from PSAT scores, patient satisfaction, and rehab success tied to insurance efficiency. A bottom panel automatically forms a full training flow once exercises are selected — reviewed, adjusted, and saved as a rehabilitation plan.
+          </p>
+          <img class="cs-img" src="../images/wizecare-rehab-studio.jpg" alt="Rehab studio">
+          <img class="cs-img" src="../images/wizecare-plan-builder.jpg" alt="Plan builder">
+        </div>
+
+      </section>
+
+      <!-- Results -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">05</span>
+          <span class="cs-section-title">Measured Success</span>
+        </div>
+        <h2 class="cs-h2">Proven impact across the platform</h2>
+        <p class="cs-p">Customer success wins showing how research and experience drive measurable outcomes.</p>
+
+        <div class="metrics-grid">
+          <div class="metric">
+            <p class="metric-value">67%</p>
+            <p class="metric-label">Cost reduction per patient</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">+92%</p>
+            <p class="metric-label">Onboarding success rate</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">+80%</p>
+            <p class="metric-label">Enhanced PT capacity vs. in-clinic care</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">+50%</p>
+            <p class="metric-label">Patient adherence success</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">6K+</p>
+            <p class="metric-label">Patients trusted worldwide</p>
+          </div>
+          <div class="metric">
+            <p class="metric-value">5</p>
+            <p class="metric-label">New competitors entered the market since 2018 GA — validating the direction</p>
+          </div>
+        </div>
+
+        <p class="cs-p" style="margin-top: 40px;">
+          Adopted by leading HMOs and health systems — including Clalit, Maccabi, Meuhedet, Cleveland Clinic, and others across the U.S. and Europe.
+        </p>
+      </section>
+
+    </div>
+
+    <div class="cs-nav-footer">
+      <a class="cs-nav-link" href="/">
+        <span class="cs-nav-direction">← All work</span>
+        <span class="cs-nav-name">Selected Work</span>
+        <span class="cs-nav-desc">Back to homepage</span>
+      </a>
+      <a class="cs-nav-link next" href="../totango/">
+        <span class="cs-nav-direction">Next case study →</span>
+        <span class="cs-nav-name">Totango</span>
+        <span class="cs-nav-desc">Customer Success SaaS</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>© 2026 Leon Penkovich · All rights reserved</span>
+      <span>Sr. Product Designer &amp; UX Architect</span>
+    </footer>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">×</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/chat.js"></script>
+  <script>
+    const overlay = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('.cs-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function close() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  </script>
+</body>
+</html>

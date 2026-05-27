@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Leon Penkovich</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* ── About header + tabs ── */
+    .about-header {
+      padding: 80px 0 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      gap: 48px;
+    }
+
+    .about-header-text {
+      flex: 1;
+      padding-bottom: 56px;
+      min-width: 0;
+    }
+
+    .personal-intro {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 680px;
+      color: var(--fg);
+      margin-bottom: 40px;
+    }
+
+    .personal-intro em {
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    .about-tabs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .about-tab {
+      padding: 12px 28px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid var(--dim);
+      background: transparent;
+      color: var(--muted);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      font-family: inherit;
+    }
+
+    .about-tab.active {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    .about-tab:hover:not(.active) {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    .about-panel { display: none; }
+    .about-panel.visible { display: block; }
+
+    /* ── Personal cards ── */
+    .personal-section {
+      padding: 64px 0;
+    }
+
+    .life-alternating {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .life-item {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .life-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .life-item-img {
+      width: 340px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .life-item-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .life-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .life-icon .material-icons {
+      font-size: 20px;
+      color: var(--muted);
+    }
+
+    .life-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    .life-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── CV section ── */
+    .cv-section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--fg);
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .cv-download:hover { opacity: 0.8; }
+
+    .cv-role {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-role:last-of-type { border-bottom: none; }
+
+    .cv-period {
+      font-size: 12px;
+      color: var(--dim);
+      padding-top: 4px;
+      line-height: 1.6;
+    }
+
+    .cv-company {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--fg);
+      margin-bottom: 3px;
+    }
+
+    .cv-title {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .cv-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cv-bullets li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+    }
+
+    .cv-bullets li::before {
+      content: '—';
+      color: var(--dim);
+      flex-shrink: 0;
+    }
+
+    /* ── Skills ── */
+    .skills-section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-clusters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .skills-cluster-title {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 16px;
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Education */
+    .edu-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+    }
+
+    @media (max-width: 900px) {
+      .life-item { flex-direction: column !important; gap: 32px; }
+      .life-item-img { width: 100%; height: 260px; }
+      .skills-clusters { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .cv-role { grid-template-columns: 1fr; gap: 8px; }
+      .edu-row { grid-template-columns: 1fr; gap: 8px; }
+      .skills-clusters { grid-template-columns: 1fr; }
+      .cv-header-row { flex-direction: column; gap: 20px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body class="light">
+
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">Leon Penkovich</a>
+      <div class="nav-right">
+        <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+          <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="nav-toggle-track"><span class="nav-toggle-thumb"></span></span>
+          <span class="nav-toggle-icon moon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/about/" style="color: var(--fg);">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- About Header -->
+    <section class="about-header">
+      <div class="about-header-text">
+        <p class="section-label">About Me</p>
+        <p class="personal-intro">
+          I'm a product designer who's spent 15+ years turning complex problems into products people actually use.
+          <em> I've worked across digital health, cybersecurity, and enterprise SaaS — always at the intersection of strategy, research, and craft.</em>
+        </p>
+        <div class="about-tabs">
+          <button class="about-tab active" data-panel="career">My Career &amp; Resume</button>
+          <button class="about-tab" data-panel="beyond">Beyond My Job Title</button>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="../images/leon-hero.png" alt="Leon Penkovich">
+      </div>
+    </section>
+
+    <!-- Panel: Career & Resume -->
+    <div id="panel-career" class="about-panel visible">
+
+    <!-- CV -->
+    <section class="cv-section">
+      <div class="cv-header-row">
+        <p class="section-label" style="margin-bottom:0;">Experience</p>
+        <a class="cv-download" href="https://tinyurl.com/penkoleon" target="_blank" rel="noopener">
+          ↓ Download CV
+        </a>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Jun 2024 — Present</div>
+        <div>
+          <p class="cv-company">Independent Projects</p>
+          <p class="cv-title">Product Design &amp; UX Consultant</p>
+          <ul class="cv-bullets">
+            <li>End-to-end product design across API security and cardiac electrophysiology</li>
+            <li>UX research, definition, and high-fidelity design delivery</li>
+            <li>HUD optimization for a resource management game</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Jan 2021 — Apr 2024</div>
+        <div>
+          <p class="cv-company">Totango</p>
+          <p class="cv-title">Lead Product Designer</p>
+          <ul class="cv-bullets">
+            <li>Reduced onboarding time by 30% via role-based, self-guided UX flows</li>
+            <li>Increased workflow efficiency up to 70% via AI-driven UX solutions</li>
+            <li>Led design system redesign — accessibility, consistency, scalable implementation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Jan 2019 — Sep 2020</div>
+        <div>
+          <p class="cv-company">Source Defence</p>
+          <p class="cv-title">Sr. Product Designer</p>
+          <ul class="cv-bullets">
+            <li>Led UX redesign of core cybersecurity platform through research and data insights</li>
+            <li>Aligned engineering, marketing, and sales around customer-centric goals</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Nov 2017 — Nov 2018</div>
+        <div>
+          <p class="cv-company">Ideo Digital</p>
+          <p class="cv-title">Head of Design</p>
+          <ul class="cv-bullets">
+            <li>Managed and mentored a hybrid team of 3 designers</li>
+            <li>Delivered responsive web products for government and tech clients</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Jan 2016 — Aug 2017</div>
+        <div>
+          <p class="cv-company">Wizecare</p>
+          <p class="cv-title">Lead Product Designer &amp; Product Manager</p>
+          <ul class="cv-bullets">
+            <li>Directed product design across a multi-platform digital health ecosystem</li>
+            <li>Delivered MVP to market in collaboration with CEO and stakeholders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Jan 2014 — Nov 2015</div>
+        <div>
+          <p class="cv-company">Netcraft</p>
+          <p class="cv-title">Project Lead, UX/UI Designer</p>
+          <ul class="cv-bullets">
+            <li>Led complex UX/UI projects from concept to onboarding</li>
+            <li>Mentored junior designers, contributed to winning tenders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-role">
+        <div class="cv-period">Nov 2009 — Dec 2013</div>
+        <div>
+          <p class="cv-company">Studio Pop</p>
+          <p class="cv-title">Founder, Product Design &amp; UX Consultant</p>
+          <ul class="cv-bullets">
+            <li>Founded design consultancy delivering UX strategy and end-to-end product design</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div style="margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border);">
+        <p class="section-label">Education</p>
+        <div class="edu-row">
+          <div class="cv-period">2004 — 2009</div>
+          <div>
+            <p class="cv-company">Bezalel Academy of Arts &amp; Design</p>
+            <p class="cv-title">B.Des, Visual Communication · Jerusalem</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills-section">
+      <p class="section-label">Skills</p>
+      <div class="skills-clusters">
+        <div>
+          <p class="skills-cluster-title">Design &amp; UX</p>
+          <div class="skills-tags">
+            <span class="tag">Product Design</span>
+            <span class="tag">UX Architecture</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Usability Testing</span>
+            <span class="tag">Design Systems</span>
+            <span class="tag">Information Architecture</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills-cluster-title">Strategy &amp; Product</p>
+          <div class="skills-tags">
+            <span class="tag">Product Strategy</span>
+            <span class="tag">PLG &amp; JTBD</span>
+            <span class="tag">Roadmap Planning</span>
+            <span class="tag">Stakeholder Management</span>
+            <span class="tag">Cross-functional Leadership</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills-cluster-title">AI &amp; Tools</p>
+          <div class="skills-tags">
+            <span class="tag">AI-Enhanced Design</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Claude</span>
+            <span class="tag">Gemini</span>
+            <span class="tag">AI Workflow Automation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /panel-career -->
+
+    <!-- Panel: Beyond My Job Title -->
+    <div id="panel-beyond" class="about-panel">
+      <section class="personal-section">
+        <div class="life-alternating">
+
+          <div class="life-item">
+            <img class="life-item-img" src="../images/about/sports-basketball.jpg" alt="Basketball">
+            <div class="life-item-text">
+              <div class="life-icon"><span class="material-icons">sports_basketball</span></div>
+              <p class="life-title">From hardwood to sand</p>
+              <p class="life-desc">After a pro basketball career, I moved to beach volleyball. Still competitive, still loud.</p>
+            </div>
+          </div>
+
+          <div class="life-item">
+            <img class="life-item-img" src="../images/about/gaming-family.jpg" alt="Family gaming">
+            <div class="life-item-text">
+              <div class="life-icon"><span class="material-icons">sports_esports</span></div>
+              <p class="life-title">Gaming since age 7</p>
+              <p class="life-desc">Commodore to PlayStation to PC. Couch co-op with my kids by day, late-night with my crew after lights out.</p>
+            </div>
+          </div>
+
+          <div class="life-item">
+            <img class="life-item-img" src="../images/about/sports-beach.jpg" alt="Beach volleyball">
+            <div class="life-item-text">
+              <div class="life-icon"><span class="material-icons">sports_volleyball</span></div>
+              <p class="life-title">Beach volleyball</p>
+              <p class="life-desc">Sand, sun, and a lot of "MINE!" — competing on the beach is where I recharge.</p>
+            </div>
+          </div>
+
+          <div class="life-item">
+            <img class="life-item-img" src="../images/about/board-games.jpg" alt="Board games">
+            <div class="life-item-text">
+              <div class="life-icon"><span class="material-icons">extension</span></div>
+              <p class="life-title">Family of dice</p>
+              <p class="life-desc">Board games are a family religion. Phones down, laughs up, just enough arguing to keep it fun.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div><!-- /panel-beyond -->
+
+    <footer>
+      <span>© 2026 Leon Penkovich · All rights reserved</span>
+      <a href="/" style="color: var(--dim); text-decoration: none;">← Back to work</a>
+    </footer>
+
+  </div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/chat.js"></script>
+  <script>
+    document.querySelectorAll('.about-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.about-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('visible'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.panel).classList.add('visible');
+      });
+    });
+  </script>
+
+</body>
+</html>
