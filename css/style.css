@@ -12,6 +12,7 @@
   --fg:      #e8e4de;
   --muted:   #999999;
   --dim:     #555555;
+  --accent:  #52B69A;
   --max:     1280px;
 }
 
@@ -23,6 +24,7 @@ body.light {
   --fg:      #111111;
   --muted:   #555555;
   --dim:     #aaaaaa;
+  --accent:  #168AAD;
 }
 
 html { scroll-behavior: smooth; }
@@ -820,8 +822,8 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
 
 /* ── CSM infographic graph ── */
 .csm-graph-wrap {
-  margin: 32px 0 0;
-  max-width: 540px;
+  margin: 0;
+  width: 100%;
 }
 
 .csm-graph {
@@ -832,6 +834,60 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
 .csm-graph rect { fill: var(--muted); }
 .csm-graph path[fill="#D2D2D2"] { fill: var(--fg); }
 .csm-graph path[fill="#2B2A2A"] { fill: var(--bg); }
+body.light .csm-graph path[fill="#91E3FC"] { fill: #1E6091; }
+
+.csm-graph-note {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+/* ── Why Customer Success — side-by-side layout ── */
+.csm-why-layout {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.csm-why-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.csm-why-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.csm-why-icon {
+  font-size: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.csm-why-item p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .csm-why-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
 
 /* ── Decorative background photo block (sub-section level) ── */
 .cs-photo-bg {
