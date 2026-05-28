@@ -818,6 +818,49 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
   letter-spacing: 0.5px;
 }
 
+/* ── CSM infographic graph ── */
+.csm-graph-wrap {
+  margin: 32px 0 0;
+  max-width: 540px;
+}
+
+.csm-graph {
+  display: block;
+  width: 100%;
+}
+
+.csm-graph rect { fill: var(--muted); }
+.csm-graph path[fill="#D2D2D2"] { fill: var(--fg); }
+.csm-graph path[fill="#2B2A2A"] { fill: var(--bg); }
+
+/* ── Decorative background photo block (sub-section level) ── */
+.cs-photo-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 0;
+  margin-bottom: 40px;
+  border-radius: 8px;
+}
+
+.cs-photo-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/csm_pic_with_gradiant.png') right center / 70% auto no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cs-photo-bg > * {
+  position: relative;
+  z-index: 2;
+  max-width: 52%;
+}
+
 /* ── Case Study Next/Prev ── */
 .cs-nav-footer {
   display: grid;
