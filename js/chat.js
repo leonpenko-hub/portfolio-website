@@ -1,72 +1,110 @@
 (function () {
 
-  // Update this URL with your Calendly / cal.com booking link
   var CALENDAR_URL = 'https://calendly.com/leon-penko';
 
   const FLOW = {
     start: {
-      msg: "Hey! What brings you here today?",
+      msg: "Hi! What's the reason for your message?",
       options: [
-        { label: "Looking to hire a designer", next: "hire"   },
-        { label: "Potential collaboration",    next: "collab" },
-        { label: "Just browsing",              next: "browse" }
+        { label: "Looking to hire a designer", next: "hire"    },
+        { label: "Have a project in mind",     next: "project" },
+        { label: "Just exploring",             next: "browse"  }
       ]
     },
+
     hire: {
       msg: "Full-time role or freelance / contract?",
       options: [
-        { label: "Full-time role",       next: "hire_ft" },
-        { label: "Freelance / Contract", next: "hire_fl" }
+        { label: "Full-time role",       next: "hire_ack", store: { inquiry: "Full-time role" }       },
+        { label: "Freelance / Contract", next: "hire_ack", store: { inquiry: "Freelance / Contract" } }
       ]
     },
-    hire_ft: {
-      msg: "Leon is open to senior design roles — ideally with some remote flexibility. How would you like to connect?",
+
+    hire_ack: {
+      msg: "Sounds great — Leon is definitely open to hearing more. How would you like to take this forward?",
       options: [
-        { label: "Send a message",     next:   "contact"  },
-        { label: "Schedule a call",    action: "calendar" },
-        { label: "Download CV first",  action: "cv"       }
+        { label: "Schedule a call",    action: "calendar"                                  },
+        { label: "Send a message",     next: "contact",  store: { intent: "Message" }      },
+        { label: "Have Leon call me",  next: "leave_phone"                                 }
       ]
     },
-    hire_fl: {
-      msg: "What type of work are you looking for?",
+
+    project: {
+      msg: "What kind of project are you working on?",
       options: [
-        { label: "Product design",  next: "contact" },
-        { label: "UX research",     next: "contact" },
-        { label: "Design system",   next: "contact" },
-        { label: "Something else",  next: "contact" }
+        { label: "Product design",  next: "project_ack", store: { inquiry: "Product design" }  },
+        { label: "UX research",     next: "project_ack", store: { inquiry: "UX research" }     },
+        { label: "Design system",   next: "project_ack", store: { inquiry: "Design system" }   },
+        { label: "Something else",  next: "project_ack", store: { inquiry: "Other" }           }
       ]
     },
-    collab: {
-      msg: "Sounds interesting! What are you working on?",
-      type: "input",
-      placeholder: "Tell me about your project...",
-      storeAs: "collab_note",
-      next: "contact"
+
+    project_ack: {
+      msg: "Interesting! What would you like to do about it?",
+      options: [
+        { label: "Get a quote",        next: "contact",   store: { intent: "Quote request" }  },
+        { label: "Schedule a call",    action: "calendar"                                     },
+        { label: "Have Leon call me",  next: "leave_phone"                                    }
+      ]
     },
+
     browse: {
-      msg: "Happy to have you here. Anything you'd like to know about Leon?",
+      msg: "Happy to have you here! Anything you'd like to know about Leon?",
       options: [
-        { label: "His background",       next: "bg"      },
-        { label: "How he works",         next: "process" },
-        { label: "Get in touch anyway",  next: "contact" }
+        { label: "His background",    next: "bg"       },
+        { label: "How he works",      next: "process"  },
+        { label: "Just get in touch", next: "what_next" }
       ]
     },
+
     bg: {
       msg: "15+ years designing complex B2B and SaaS products — digital health, cybersecurity, enterprise. Always at the intersection of strategy, research, and craft.",
       options: [
-        { label: "See his work",  action: "work"    },
-        { label: "Get in touch",  next:   "contact" }
+        { label: "See his work",   action: "work"     },
+        { label: "Get in touch",   next: "what_next"  }
       ]
     },
+
     process: {
       msg: "Research first, always. Leon maps the problem space before touching Figma — user flows, IA, then high-fidelity. AI is embedded into every stage.",
       options: [
-        { label: "See his work",  action: "work"    },
-        { label: "Get in touch",  next:   "contact" }
+        { label: "See his work",   action: "work"     },
+        { label: "Get in touch",   next: "what_next"  }
       ]
     },
+
+    what_next: {
+      msg: "How would you like to connect?",
+      options: [
+        { label: "Schedule a call",    action: "calendar"                                  },
+        { label: "Send a message",     next: "contact",  store: { intent: "Message" }      },
+        { label: "Have Leon call me",  next: "leave_phone"                                 }
+      ]
+    },
+
+    leave_phone: {
+      msg: "Sure! Leave your number and Leon will call you back.",
+      type: "input",
+      placeholder: "Your phone number",
+      storeAs: "phone",
+      next: "contact_phone"
+    },
+
+    contact_phone: {
+      msg: "Got it. Anything else you'd like to add?",
+      type: "input",
+      placeholder: "Optional message...",
+      storeAs: "extra_msg",
+      next: "contact_done"
+    },
+
+    contact_done: {
+      msg: "Perfect. Leon will call you back as soon as possible.",
+      type: "done"
+    },
+
     contact: {
-      msg: "Drop your email and a quick note — Leon usually replies the same day.",
+      msg: "Leave your details and Leon will get back to you as soon as possible.",
       type: "form"
     }
   };
@@ -126,6 +164,7 @@
     typing(function () {
       botMsg(s.msg);
       if      (s.type === 'form')  showForm();
+      else if (s.type === 'done')  sendCallbackRequest();
       else if (s.type === 'input') showInput(s.placeholder, s.storeAs, s.next);
       else if (s.options)          showOptions(s.options);
     });
@@ -172,6 +211,8 @@
   function pick(opt) {
     clearFoot();
     userMsg(opt.label);
+    if (opt.store) Object.assign(ctx, opt.store);
+
     if (opt.action === 'cv') {
       window.open('https://tinyurl.com/penkoleon', '_blank');
       typing(function () {
@@ -238,28 +279,68 @@
     setTimeout(function () { inp.focus(); }, 50);
   }
 
+  // ── Callback request (call me) ─────────────────
+  function sendCallbackRequest() {
+    var details = 'Callback request\n';
+    if (ctx.phone)     details += 'Phone: '   + ctx.phone     + '\n';
+    if (ctx.inquiry)   details += 'Inquiry: ' + ctx.inquiry   + '\n';
+    if (ctx.extra_msg) details += 'Note: '    + ctx.extra_msg + '\n';
+    var subject = encodeURIComponent('Someone left a message in your portfolio');
+    var body    = encodeURIComponent(details);
+    var foot = document.getElementById('chat-foot');
+    var btn = document.createElement('button');
+    btn.className = 'chat-form-cal';
+    btn.textContent = 'Schedule a call in the meantime ↗';
+    btn.addEventListener('click', function () { window.open(CALENDAR_URL, '_blank'); });
+    foot.appendChild(btn);
+    setTimeout(function () {
+      window.location.href = 'mailto:leon.penko@gmail.com?subject=' + subject + '&body=' + body;
+    }, 1000);
+  }
+
   // ── Contact form ───────────────────────────────
   function showForm() {
     var foot = document.getElementById('chat-foot');
     var form = document.createElement('div');
     form.className = 'chat-form';
     form.innerHTML =
-      '<input id="cf-email" type="email" placeholder="Your email" required>' +
+      '<input id="cf-name"  type="text"  placeholder="Your name" required>' +
+      '<input id="cf-email" type="email" placeholder="Email address" required>' +
+      '<input id="cf-phone" type="tel"   placeholder="Phone (optional)">' +
       '<textarea id="cf-msg" placeholder="Your message"></textarea>' +
       '<button id="cf-send" class="chat-form-send">Send message</button>' +
       '<button id="cf-cal"  class="chat-form-cal">Schedule a call instead ↗</button>';
     foot.appendChild(form);
 
     document.getElementById('cf-send').addEventListener('click', function () {
+      var name  = document.getElementById('cf-name').value.trim();
       var email = document.getElementById('cf-email').value.trim();
+      var phone = document.getElementById('cf-phone').value.trim();
       var msg   = document.getElementById('cf-msg').value.trim();
       if (!email) { document.getElementById('cf-email').focus(); return; }
-      var extra   = ctx.collab_note ? '\n\nProject note: ' + ctx.collab_note : '';
-      var subject = encodeURIComponent('Portfolio inquiry');
-      var body    = encodeURIComponent('From: ' + email + '\n\n' + msg + extra);
+
+      var details = 'From: ' + (name || 'Unknown') + '\nEmail: ' + email;
+      if (phone)            details += '\nPhone: ' + phone;
+      if (ctx.inquiry)      details += '\n\nInquiry: ' + ctx.inquiry;
+      if (ctx.intent)       details += '\nIntent: '  + ctx.intent;
+      if (msg)              details += '\n\nMessage: ' + msg;
+
+      var subject = encodeURIComponent('Someone left a message in your portfolio');
+      var body    = encodeURIComponent(details);
+
       clearFoot();
       userMsg(email);
-      typing(function () { botMsg("Message sent! Leon will get back to you soon."); });
+      typing(function () {
+        botMsg("Message received. Leon will get back to you as soon as possible.");
+        setTimeout(function () {
+          var foot = document.getElementById('chat-foot');
+          var btn = document.createElement('button');
+          btn.className = 'chat-form-cal';
+          btn.textContent = 'Schedule a call in the meantime ↗';
+          btn.addEventListener('click', function () { window.open(CALENDAR_URL, '_blank'); });
+          foot.appendChild(btn);
+        }, 900);
+      });
       setTimeout(function () {
         window.location.href = 'mailto:leon.penko@gmail.com?subject=' + subject + '&body=' + body;
       }, 1000);

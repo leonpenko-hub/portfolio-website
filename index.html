@@ -103,7 +103,7 @@
   <!-- Sticky Nav -->
   <header class="site-nav" id="site-nav">
     <div class="nav-inner">
-      <a class="nav-logo" href="/">Leon Penkovich</a>
+      <a class="nav-logo" href="/"><img class="nav-logo-img" src="images/leonpenko_logo.svg" alt="Leon Penkovich"></a>
       <div class="nav-right">
         <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
           <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
@@ -142,7 +142,7 @@
       <div class="case-grid">
 
         <a class="case-card" href="wizecare/">
-          <img class="case-card-thumb" src="images/wizecare-dashboard.jpg" alt="Wizecare dashboard UI">
+          <img class="case-card-thumb" src="images/wizecare_thumb.png" alt="Wizecare dashboard UI">
           <div class="case-card-body">
             <p class="case-card-num">01</p>
             <p class="case-card-company">Wizecare</p>
@@ -159,7 +159,7 @@
         </a>
 
         <a class="case-card" href="totango/">
-          <img class="case-card-thumb" src="images/totango-role-layouts.jpg" alt="Totango UI">
+          <img class="case-card-thumb" src="images/totango_thumb.png" alt="Totango UI">
           <div class="case-card-body">
             <p class="case-card-num">02</p>
             <p class="case-card-company">Totango</p>
@@ -210,27 +210,37 @@
           </a>
         </div>
 
-        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none"><input name="bot-field"></p>
           <div class="form-field">
             <label class="form-label" for="name">Name</label>
-            <input class="form-input" id="name" type="text" placeholder="Your name" required>
+            <input class="form-input" id="name" name="name" type="text" placeholder="Your name" required>
           </div>
           <div class="form-field">
             <label class="form-label" for="email">Email</label>
-            <input class="form-input" id="email" type="email" placeholder="your@email.com" required>
+            <input class="form-input" id="email" name="email" type="email" placeholder="your@email.com" required>
           </div>
           <div class="form-field">
             <label class="form-label" for="message">Message</label>
-            <textarea class="form-textarea" id="message" placeholder="What's on your mind?" required></textarea>
+            <textarea class="form-textarea" id="message" name="message" placeholder="What's on your mind?" required></textarea>
           </div>
           <button class="form-submit" type="submit">Send message</button>
         </form>
+
+        <div id="contact-success" style="display:none; padding: 40px 0;">
+          <p style="font-size: 20px; color: var(--fg); margin-bottom: 12px;">Message received.</p>
+          <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">I'll read it carefully and get back to you — usually within the same day.</p>
+        </div>
 
       </div>
     </section>
 
     <footer>
-      <span>© 2026 Leon Penkovich · All rights reserved</span>
+      <span style="display:flex;align-items:center;gap:10px;">
+        <img src="images/leonpenko_logo.svg" alt="Leon Penkovich" class="footer-logo" style="height:20px;width:auto;opacity:0.4;">
+        © 2026 Leon Penkovich · All rights reserved
+      </span>
       <span>Sr. Product Designer &amp; UX Architect</span>
     </footer>
 
@@ -243,15 +253,19 @@
       document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 10);
     });
 
-    function handleSubmit(e) {
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const msg = document.getElementById('message').value;
-      const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
-      const body = encodeURIComponent(`From: ${name} (${email})\n\n${msg}`);
-      window.location.href = `mailto:leon.penko@gmail.com?subject=${subject}&body=${body}`;
-    }
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(this)).toString()
+      }).then(() => {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+      }).catch(() => {
+        alert('Something went wrong. Please try again.');
+      });
+    });
   </script>
 
 </body>

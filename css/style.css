@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap');
 
 @view-transition { navigation: auto; }
 
@@ -38,6 +38,12 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+h1, h2, h3, h4,
+.hero-name, .cs-title, .cs-h2, .step-title, .problem-title, .metric-value, .case-card-company {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 600;
+}
+
 /* ── Layout ── */
 .wrap {
   max-width: var(--max);
@@ -66,18 +72,33 @@ body {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 48px;
-  height: 64px;
+  height: 68px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-logo {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: var(--fg);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+body:not(.light) .nav-logo-img,
+body:not(.light) .footer-logo {
+  filter: invert(1);
+}
+
+.site-nav.scrolled .nav-logo-img {
+  transform: scale(0.6);
 }
 
 .nav-links {
@@ -816,10 +837,34 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
 }
 
-.cs-nav-link:hover { background: var(--surface); }
+.cs-nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--thumb);
+  background-size: cover;
+  background-position: center top;
+  filter: grayscale(100%) brightness(0.5);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.cs-nav-link:hover::before {
+  opacity: 0.5;
+}
+
+.cs-nav-link:hover { background: var(--bg); }
+
+.cs-nav-link > * {
+  position: relative;
+  z-index: 1;
+}
 
 .cs-nav-link.next { text-align: right; align-items: flex-end; }
 
