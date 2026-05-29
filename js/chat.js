@@ -125,7 +125,7 @@
       '<div id="chat-panel" class="chat-panel">' +
         '<div class="chat-header">' +
           '<div class="chat-header-left">' +
-            '<div class="chat-avatar">LP</div>' +
+            '<div class="chat-avatar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="93.6 43.4 103.7 62" width="20" height="20"><path fill="currentColor" fill-rule="evenodd" d="M169.2,43.4c-18.2-.9-31.6,12-31.6,30v18.1h-14.2c-9.9,0-17.9-8-17.9-17.9v-12.2c0-3.3-2.7-6-6-6h0c-3.3,0-6,2.7-6,6v12.2c0,16.5,13.4,29.9,29.9,29.9h14.2v14.8c0,3.3,2.5,6.2,5.8,6.2s6.2-2.6,6.2-6v-15.1h17.9c16.5,0,29.9-13.4,29.9-29.9h0c0-16-12.3-29.4-28.1-30.2ZM185.3,73.6c0,8.6-4.7,17.9-17.9,17.9h-17.9v-18.1c0-10.8,7.6-18.3,18.4-18,9.5.2,17.3,8.7,17.3,18.2h0Z"/></svg></div>' +
             '<div>' +
               '<p class="chat-hname">Leon Penkovich</p>' +
               '<p class="chat-hsub">Usually replies same day</p>' +

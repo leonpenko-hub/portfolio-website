@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Totango — Leon Penkovich</title>
   <meta name="description" content="Modular widget-based dashboard redesign for a leading Customer Success SaaS platform. Case study by Leon Penkovich.">
@@ -12,7 +13,7 @@
 
   <header class="site-nav" id="site-nav">
     <div class="nav-inner">
-      <a class="nav-logo" href="/"><img class="nav-logo-img" src="../images/leonpenko_logo.svg" alt="Leon Penkovich"></a>
+      <a class="nav-logo" href="/"><img class="nav-logo-img" src="../images/lp_logo.svg" alt="Leon Penkovich"></a>
       <div class="nav-right">
         <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
           <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
@@ -64,7 +65,14 @@
 
         <div class="cs-photo-bg">
           <h2 class="cs-h2">What is Totango?</h2>
-          <div class="csm-why-layout">
+          <p class="cs-p">
+            Totango is a SaaS platform that empowers CSM teams and managers to design and build customer success journeys — from onboarding to renewal — so they can measure performance, scale operations, and proactively prevent churn before customers disengage. A self-service platform that makes customer success approachable for businesses of any size or industry.
+          </p>
+        </div>
+
+        <hr class="cs-divider">
+        <h2 class="cs-h2">Why Customer Success Matters</h2>
+        <div class="csm-why-layout">
           <ul class="csm-why-points">
             <li class="csm-why-item">
               <span class="material-symbols-outlined csm-why-icon">support_agent</span>
@@ -149,10 +157,11 @@
           </linearGradient>
           </defs>
           </svg>
+          <p class="csm-graph-note">* Example of a Customer Journey — each business adapts its own flow based on customer type, goals, and lifecycle stage.</p>
           </div>
         </div>
-        <p class="csm-graph-note">* Example of a Customer Journey — each business adapts its own flow based on customer type, goals, and lifecycle stage.</p>
 
+        <hr class="cs-divider">
         <h2 class="cs-h2">Main Goal</h2>
         <p class="cs-p">
           Unify the platform for all CSM roles with a modernized, smoother user experience and consistent onboarding and adoption flow — reducing support load and feature requests while increasing CSAT and customer advocacy.
@@ -327,7 +336,7 @@
 
     <footer>
       <span style="display:flex;align-items:center;gap:10px;">
-        <img src="../images/leonpenko_logo.svg" alt="Leon Penkovich" class="footer-logo" style="height:20px;width:auto;opacity:0.4;">
+        <img src="../images/lp_logo.svg" alt="Leon Penkovich" class="footer-logo" style="height:20px;width:auto;opacity:0.4;">
         © 2026 Leon Penkovich · All rights reserved
       </span>
       <span>Sr. Product Designer &amp; UX Architect</span>
@@ -362,6 +371,32 @@
     document.getElementById('lightbox-close').addEventListener('click', close);
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+    document.querySelectorAll('.csm-graph rect[rx="20"]').forEach(rect => {
+      const numPath = rect.nextElementSibling;
+      if (!numPath || numPath.tagName.toLowerCase() !== 'path') return;
+
+      const isLabel = el => el && el.tagName.toLowerCase() === 'path' &&
+        el.getAttribute('fill')?.toLowerCase() === '#d2d2d2';
+
+      const prevEl = rect.previousElementSibling;
+      const labelBefore = isLabel(prevEl) ? prevEl : null;
+      const labelAfter  = !labelBefore && isLabel(numPath.nextElementSibling)
+        ? numPath.nextElementSibling : null;
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.classList.add('journey-badge');
+
+      if (labelBefore) {
+        rect.parentNode.insertBefore(g, labelBefore);
+        g.appendChild(labelBefore);
+      } else {
+        rect.parentNode.insertBefore(g, rect);
+      }
+      g.appendChild(rect);
+      g.appendChild(numPath);
+      if (labelAfter) g.appendChild(labelAfter);
+    });
   </script>
 </body>
 </html>

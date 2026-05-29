@@ -87,11 +87,12 @@ h1, h2, h3, h4,
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 46px;
   width: auto;
   display: block;
   transform-origin: left center;
   transition: transform 0.3s ease;
+  transform: translateY(4px);
 }
 
 body:not(.light) .nav-logo-img,
@@ -824,6 +825,7 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
 .csm-graph-wrap {
   margin: 0;
   width: 100%;
+  position: relative;
 }
 
 .csm-graph {
@@ -836,20 +838,43 @@ body.light .cs-section-num { color: var(--dim); opacity: 0.3; }
 .csm-graph path[fill="#2B2A2A"] { fill: var(--bg); }
 body.light .csm-graph path[fill="#91E3FC"] { fill: #1E6091; }
 
+.csm-graph .journey-badge {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+.csm-graph .journey-badge:hover {
+  transform: scale(2);
+}
+
 .csm-graph-note {
-  margin-top: 12px;
-  font-size: 11px;
+  position: absolute;
+  left: 62%;
+  top: 72%;
+  max-width: 170px;
+  font-size: 10px;
   color: var(--dim);
   line-height: 1.5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+/* ── Section divider ── */
+.cs-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0 28px;
 }
 
 /* ── Why Customer Success — side-by-side layout ── */
 .csm-why-layout {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 2fr 5fr;
   gap: 48px;
-  align-items: center;
-  margin-top: 32px;
+  align-items: start;
+  margin-top: 0;
 }
 
 .csm-why-points {
@@ -858,27 +883,41 @@ body.light .csm-graph path[fill="#91E3FC"] { fill: #1E6091; }
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 
 .csm-why-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.csm-why-item:first-child {
+  padding-top: 0;
+}
+
+.csm-why-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .csm-why-icon {
-  font-size: 20px;
-  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+  width: 20px;
+  text-align: center;
+  color: var(--fg);
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 
 .csm-why-item p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -1114,9 +1153,6 @@ body.light .lightbox-close:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
   flex-shrink: 0;
 }
 
