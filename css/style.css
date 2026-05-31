@@ -14,6 +14,9 @@
   --dim:     #555555;
   --accent:  #52B69A;
   --max:     1280px;
+  --leaf-front: #1e1e1e;
+  --leaf-mid:   #282828;
+  --leaf-back:  #333333;
 }
 
 /* ── Light mode ── */
@@ -25,6 +28,9 @@ body.light {
   --muted:   #555555;
   --dim:     #aaaaaa;
   --accent:  #168AAD;
+  --leaf-front: #dddad4;
+  --leaf-mid:   #e5e2dc;
+  --leaf-back:  #eeebe7;
 }
 
 html { scroll-behavior: smooth; }
@@ -201,11 +207,37 @@ body.light .nav-toggle-thumb {
 }
 
 .hero-photo img {
-  height: 605px;
+  height: min(545px, 55vh);
   width: auto;
   display: block;
   view-transition-name: leon-photo;
 }
+
+/* leaf SVG theme fills — used by both leaves-full and leaves-min */
+.lf1 { fill: var(--leaf-mid); stroke-width: 0px; }
+.lf2 { fill: none; stroke-width: 0px; }
+.lf3 { fill: var(--leaf-back); stroke-width: 0px; }
+.lf4 { fill: var(--leaf-front); stroke-width: 0px; }
+
+.hero-leaves-wrap {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  transform-origin: 50% 100%;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.hero-leaves-wrap svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: block;
+  transition: opacity 0.6s ease-out;
+}
+
+.leaves-full { opacity: 1; }
+.leaves-min  { opacity: 0; }
 
 .hero-name {
   font-size: clamp(52px, 6.5vw, 96px);
