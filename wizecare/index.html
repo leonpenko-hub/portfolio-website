@@ -7,6 +7,7 @@
   <title>Wizecare — Leon Penkovich</title>
   <meta name="description" content="Personalized remote physical therapy platform. Product design, UX research, and product management case study by Leon Penkovich.">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
   <style>body { background: var(--bg); }</style>
 </head>
 <body class="light">
@@ -83,33 +84,115 @@
           <span class="cs-section-title">Problem Statements</span>
         </div>
         <h2 class="cs-h2">Three problems driving the design</h2>
-        <div class="problem-grid">
 
-          <div class="problem-card">
-            <p class="problem-num">01</p>
-            <p class="problem-title">Insurance Exposed to Rehab Fraud</p>
-            <p class="problem-body">
-              Insurance companies pay for PT sessions without being able to verify whether claimed rehab hours were truly necessary — creating fraud risk and financial losses.
-            </p>
-            <p class="problem-who">Affected: Insurance companies</p>
+        <div class="problem-pairs-grid problem-pairs-grid--3">
+
+          <div class="problem-pair">
+            <div class="problem-card-top">
+              <p class="problem-num">Problem statement 01</p>
+              <p class="problem-title">Insurance Exposed to Rehab Fraud</p>
+              <p class="problem-body">
+                Insurance companies often pay for PT sessions without being able to verify whether claimed rehab hours were truly necessary. Some therapists may exploit this by submitting inflated or false reports, causing financial losses for insurers.
+              </p>
+            </div>
+            <ul class="problem-facts">
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">article</span>
+                <div>
+                  <p class="problem-fact-label">What is the problem?</p>
+                  <p class="problem-fact-value">Unverified rehab plans</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">person_pin</span>
+                <div>
+                  <p class="problem-fact-label">Who is affected?</p>
+                  <p class="problem-fact-value">Insurance companies</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">hub</span>
+                <div>
+                  <p class="problem-fact-label">Why it's a problem:</p>
+                  <p class="problem-fact-value">Fraud risk & money loss</p>
+                </div>
+              </li>
+            </ul>
+            <div class="problem-pair-img-wrap">
+              <img src="../images/wizecare_problem1.jpg" alt="Insurance fraud evidence" class="problem-pair-img">
+            </div>
           </div>
 
-          <div class="problem-card">
-            <p class="problem-num">02</p>
-            <p class="problem-title">Adherence Gap in Physical Therapy</p>
-            <p class="problem-body">
-              Most rehab (70–80%) happens outside the clinic, yet up to 65% of patients don't follow their programs. This leads to misreporting, longer recovery, and disputes with insurers.
-            </p>
-            <p class="problem-who">Affected: Physical therapists, patients</p>
+          <div class="problem-pair">
+            <div class="problem-card-top">
+              <p class="problem-num">Problem statement 02</p>
+              <p class="problem-title">Adherence Gap in Physical Therapy</p>
+              <p class="problem-body">
+                Most rehab (70–80%) happens outside the clinic, yet up to 65% of patients don't follow their programs properly. This leads to misreporting, longer recovery times, and disputes with insurers.
+              </p>
+            </div>
+            <ul class="problem-facts">
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">article</span>
+                <div>
+                  <p class="problem-fact-label">What is the problem?</p>
+                  <p class="problem-fact-value">Adherence gap</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">person_pin</span>
+                <div>
+                  <p class="problem-fact-label">Who is affected?</p>
+                  <p class="problem-fact-value">Physical therapist, patients</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">hub</span>
+                <div>
+                  <p class="problem-fact-label">Why it's a problem:</p>
+                  <p class="problem-fact-value">Slower recovery, higher costs</p>
+                </div>
+              </li>
+            </ul>
+            <div class="problem-pair-img-wrap">
+              <img src="../images/wizecare_problem2.jpg" alt="Patient on crutches" class="problem-pair-img">
+            </div>
           </div>
 
-          <div class="problem-card">
-            <p class="problem-num">03</p>
-            <p class="problem-title">Limited Visibility Beyond the Clinic</p>
-            <p class="problem-body">
-              Clinic managers struggle to monitor the full rehab journey. Unmonitored processes lead to patient complaints, lower satisfaction, and financial losses.
-            </p>
-            <p class="problem-who">Affected: Clinic managers, patients</p>
+          <div class="problem-pair">
+            <div class="problem-card-top">
+              <p class="problem-num">Problem statement 03</p>
+              <p class="problem-title">Limited Visibility Beyond the Clinic</p>
+              <p class="problem-body">
+                Clinic managers struggle to monitor the full rehab journey. They must assign the right PTs to the right patients, yet most of the process happens unmonitored outside the clinic.
+              </p>
+            </div>
+            <ul class="problem-facts">
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">article</span>
+                <div>
+                  <p class="problem-fact-label">What is the problem?</p>
+                  <p class="problem-fact-value">Lack of patient risk management</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">person_pin</span>
+                <div>
+                  <p class="problem-fact-label">Who is affected?</p>
+                  <p class="problem-fact-value">Clinic manager, patients</p>
+                </div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">hub</span>
+                <div>
+                  <p class="problem-fact-label">Why it's a problem:</p>
+                  <p class="problem-fact-value">Patient complaints, revenue loss</p>
+                </div>
+              </li>
+            </ul>
+            <div class="problem-pair-img-wrap">
+              <img src="../images/wizecare_problem3.jpg" alt="Clinic file management" class="problem-pair-img">
+            </div>
           </div>
 
         </div>
