@@ -136,7 +136,9 @@
         </div>
       </div>
       <div class="hero-photo" aria-hidden="true">
+        <div class="hero-sun" id="hero-sun"></div>
         <div class="hero-leaves-wrap">
+        <canvas id="wind-canvas"></canvas>
         <svg class="leaves-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMax meet">
           <g><path class="lf3" d="M183.8,347.9l-1.8,1.8,1.8,1.8c1.3,1.3,2.7.9,3.6,0h0c1-1,1-2.6,0-3.5-1.1-1.1-2.6-1.1-3.6,0Z"/><path class="lf3" d="M185.7,305.9c3.5,0,6.3-2.8,6.3-6.3h0c0-3.4-2.6-6.2-6-6.4-3.9-.2-6.7,2.5-6.7,6.3v3.8h-3c-2.1,0-3.8-1.7-3.8-3.8v-2.6c0-.7-.6-1.3-1.3-1.3h0c-.7,0-1.3.6-1.3,1.3v2.6c0,3.5,2.8,6.3,6.3,6.3h3v28.2l-1.8-1.8c-1.4-1.4-2.8-.9-3.7,0h0c-1,1-1.1,2.7,0,3.7,1.1,1.2,2.7,1.2,3.8,0l1.8-1.8v31.9l-1.3-1.3c-1-1-2.1-.7-2.8,0h0c-.7.7-.8,2,0,2.7.8.9,2,.9,2.8,0l1.3-1.3v34.9h2.5c0,0,0-77.1,0-77.1l2.2,2.2c2,2,4.1,1.3,5.3,0h0c1.4-1.4,1.5-3.9.1-5.3-1.6-1.7-3.8-1.7-5.4,0l-2.2,2.2v-17.1h3.8ZM181.9,299.6c0-2.3,1.6-3.9,3.9-3.8,2,0,3.7,1.8,3.7,3.8h0c0,1.8-1,3.8-3.8,3.8h-3.8v-3.8Z"/></g>
           <g><path class="lf3" d="M336.8,347.9l-1.8,1.8,1.8,1.8c1.3,1.3,2.7.9,3.6,0h0c1-1,1-2.6,0-3.5-1.1-1.1-2.6-1.1-3.6,0Z"/><path class="lf3" d="M338.7,305.9c3.5,0,6.3-2.8,6.3-6.3h0c0-3.4-2.6-6.2-6-6.4-3.9-.2-6.7,2.5-6.7,6.3v3.8h-3c-2.1,0-3.8-1.7-3.8-3.8v-2.6c0-.7-.6-1.3-1.3-1.3h0c-.7,0-1.3.6-1.3,1.3v2.6c0,3.5,2.8,6.3,6.3,6.3h3v28.2l-1.8-1.8c-1.4-1.4-2.8-.9-3.7,0h0c-1,1-1.1,2.7,0,3.7,1.1,1.2,2.7,1.2,3.8,0l1.8-1.8v31.9l-1.3-1.3c-1-1-2.1-.7-2.8,0h0c-.7.7-.8,2,0,2.7.8.9,2,.9,2.8,0l1.3-1.3v34.9h2.5c0,0,0-77.1,0-77.1l2.2,2.2c2,2,4.1,1.3,5.3,0h0c1.4-1.4,1.5-3.9.1-5.3-1.6-1.7-3.8-1.7-5.4,0l-2.2,2.2v-17.1h3.8ZM334.9,299.6c0-2.3,1.6-3.9,3.9-3.8,2,0,3.7,1.8,3.7,3.8h0c0,1.8-1,3.8-3.8,3.8h-3.8v-3.8Z"/></g>
@@ -164,6 +166,7 @@
           <path class="lf4" d="M119.6,147.8c9.3,0,16.8-7.5,16.8-16.8h0c0-9-6.9-16.6-15.8-17-10.2-.5-17.8,6.8-17.8,16.9v10.2h-8c-5.6,0-10.1-4.5-10.1-10.1v-6.9c0-1.9-1.5-3.4-3.4-3.4h0c-1.9,0-3.4,1.5-3.4,3.4v6.9c0,9.3,7.5,16.8,16.8,16.8h8v74.9l-4.8-4.8c-3.6-3.6-7.5-2.4-9.9,0h0c-2.6,2.7-2.8,7.1-.2,9.8,2.9,3.1,7.1,3.1,10.1.1l4.9-4.9v85l-3.5-3.5c-2.7-2.7-5.6-1.8-7.3,0h0c-2,2-2.1,5.3-.2,7.3,2.2,2.3,5.3,2.3,7.5,0l3.6-3.6v92.8h6.8c0,.1,0-205,0-205l5.8,5.8c5.2,5.2,10.8,3.4,14.2,0h0c3.8-3.8,4.1-10.3.3-14.2-4.2-4.4-10.2-4.5-14.5-.2l-5.9,5.9v-45.6h10.1ZM109.6,130.9c0-6.1,4.3-10.3,10.4-10.1,5.4.1,9.7,4.9,9.7,10.2h0c0,4.9-2.6,10.1-10.1,10.1h-10.1v-10.2Z"/>
         </svg>
         </div><!-- /.hero-leaves-wrap -->
+        <canvas id="cloud-canvas"></canvas>
       </div>
     </section>
 
@@ -280,62 +283,280 @@
   <script src="js/theme.js"></script>
   <script src="js/chat.js"></script>
   <script>
-    // Leaf interactions — wind (skewX), grow/shrink (cross-fade leafs ↔ leafs2)
+    // Sun: sinks between plants on scroll (light mode only)
+    (function () {
+      const sun = document.getElementById('hero-sun');
+      if (!sun) return;
+      window.addEventListener('scroll', function () {
+        const hero = document.querySelector('.hero');
+        const heroH = hero ? hero.offsetHeight : 600;
+        const p = Math.min(1, window.scrollY / heroH);
+        sun.style.transform = 'translateY(' + (p * 440) + 'px)';
+        if (document.body.classList.contains('light')) {
+          sun.style.opacity = Math.max(0, 1 - p * 1.8);
+        } else {
+          sun.style.removeProperty('opacity'); // let CSS handle dark mode
+        }
+      }, { passive: true });
+    })();
+
+    // Cloud canvas — rays (light), moon+stars (dark), clouds on wind
+    (function () {
+      const cc = document.getElementById('cloud-canvas');
+      if (!cc) return;
+      const ctx = cc.getContext('2d');
+      const clouds = [];
+      let windX = 0, rayAngle = 0;
+
+      // Stars spread across sky (upper 70% of canvas = above plants)
+      const STARS = Array.from({length: 14}, () => ({
+        rx: 0.03 + Math.random() * 0.94,
+        ry: 0.02 + Math.random() * 0.65,
+        r:  0.6 + Math.random() * 1.3,
+        ph: Math.random() * Math.PI * 2
+      }));
+
+      let themeMoonAlpha = 0; // 0=hidden, 1=fully visible — animates on theme change
+      let scrollDrop = 0, scrollMoonAlpha = 1;
+
+      function resize() { cc.width = cc.offsetWidth || 480; cc.height = cc.offsetHeight || 480; }
+      function sp()    { return { x: cc.width - 41, y: 41 + scrollDrop }; }
+      function light() { return document.body.classList.contains('light'); }
+
+      window.addEventListener('scroll', function () {
+        const hero = document.querySelector('.hero');
+        const heroH = hero ? hero.offsetHeight : 600;
+        const p = Math.min(1, window.scrollY / heroH);
+        scrollDrop = p * 440;
+        scrollMoonAlpha = Math.max(0, 1 - p * 1.8);
+      }, { passive: true });
+      // Fix: read from body to capture body.light overrides
+      function v(n)    { return getComputedStyle(document.body).getPropertyValue(n).trim(); }
+
+      function hexToRgba(hex, a) {
+        hex = (hex || '#aaaaaa').replace('#','');
+        if (hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
+        const r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
+        return 'rgba('+r+','+g+','+b+','+a+')';
+      }
+
+      function drawRays(s) {
+        const R = 23, N = 14, step = (Math.PI*2) / N;
+        const col = v('--leaf-front') || '#c8c5c0';
+        const t = Date.now() * 0.0006;
+        for (let i = 0; i < N; i++) {
+          const ang  = rayAngle + i * step;
+          const long = i % 2 === 0;
+          // amorphic length: base + two sine waves with different phases per ray
+          const wave = Math.sin(t * 1.1 + i * 1.3) * 3.5 + Math.sin(t * 0.7 + i * 2.1) * 2;
+          const len  = Math.max(4, (long ? 15 : 7) + wave);
+          const x1 = s.x + Math.cos(ang) * (R + 3);
+          const y1 = s.y + Math.sin(ang) * (R + 3);
+          const x2 = s.x + Math.cos(ang) * (R + 3 + len);
+          const y2 = s.y + Math.sin(ang) * (R + 3 + len);
+          const g  = ctx.createLinearGradient(x1, y1, x2, y2);
+          g.addColorStop(0, hexToRgba(col, long ? 0.65 : 0.42));
+          g.addColorStop(1, hexToRgba(col, 0));
+          ctx.save();
+          ctx.strokeStyle = g;
+          ctx.lineWidth = long ? 1.3 : 0.75;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+          ctx.restore();
+        }
+        rayAngle += 0.00035;
+      }
+
+      // Offscreen canvas for moon crescent (created once, reused)
+      const moonOff = document.createElement('canvas');
+      moonOff.width = 80; moonOff.height = 80;
+      const moonOffCtx = moonOff.getContext('2d');
+      const MOX = 40, MOY = 40, MR = 20;
+
+      function drawMoonStars(s) {
+        const col = v('--leaf-mid') || '#333333';
+        const t   = Date.now() * 0.001;
+
+        // --- Crescent via offscreen canvas ---
+        moonOffCtx.clearRect(0, 0, 80, 80);
+        // Full moon circle
+        moonOffCtx.fillStyle = hexToRgba(col, 0.92);
+        moonOffCtx.beginPath();
+        moonOffCtx.arc(MOX, MOY, MR, 0, Math.PI*2);
+        moonOffCtx.fill();
+        // Cut bite with destination-out
+        moonOffCtx.globalCompositeOperation = 'destination-out';
+        moonOffCtx.fillStyle = 'rgba(0,0,0,1)';
+        moonOffCtx.beginPath();
+        moonOffCtx.arc(MOX + MR*0.65, MOY - MR*0.1, MR*0.85, 0, Math.PI*2);
+        moonOffCtx.fill();
+        moonOffCtx.globalCompositeOperation = 'source-over';
+        // Stamp onto main canvas at moon position
+        ctx.drawImage(moonOff, s.x - MOX, s.y - MOY);
+
+        // --- Stars (fixed position, use combined alpha from caller) ---
+        const parentAlpha = ctx.globalAlpha;
+        STARS.forEach(st => {
+          ctx.save();
+          ctx.globalAlpha = parentAlpha * (0.3 + 0.4 * Math.sin(st.ph + t * 0.9));
+          ctx.fillStyle = hexToRgba(col, 1);
+          ctx.beginPath();
+          ctx.arc(st.rx * cc.width, st.ry * cc.height, st.r, 0, Math.PI*2);
+          ctx.fill();
+          ctx.restore();
+        });
+      }
+
+      function spawnCloud() {
+        if (Math.abs(windX) < 0.15 || clouds.length >= 3) return;
+        const s = sp();
+        for (const c of clouds) { if (Math.hypot(c.x-s.x, c.y-s.y) < 22) return; }
+        const a = Math.random()*Math.PI*2, d = 6 + Math.random()*20;
+        clouds.push({
+          x: s.x+Math.cos(a)*d, y: s.y+Math.sin(a)*d,
+          vel: -windX*(0.2+Math.random()*0.35),
+          r: 7+Math.random()*7,
+          p2x: 0.55+Math.random()*0.7,  p2y: -0.4+Math.random()*0.45, p2r: 0.5+Math.random()*0.35,
+          p3x:-(0.45+Math.random()*0.5), p3y: -0.25+Math.random()*0.3, p3r: 0.4+Math.random()*0.3,
+          p4: Math.random()>0.42, p4x: 1.1+Math.random()*0.55, p4r: 0.28+Math.random()*0.28,
+          life: 0, maxLife: 110+Math.random()*90, maxOp: 0.92
+        });
+      }
+
+      function drawScene() {
+        ctx.clearRect(0, 0, cc.width, cc.height);
+        const s = sp();
+        const isLight = light();
+
+        // Smooth theme transition for moon
+        const targetMoon = isLight ? 0 : 1;
+        if (themeMoonAlpha < targetMoon) themeMoonAlpha = Math.min(targetMoon, themeMoonAlpha + 0.025);
+        if (themeMoonAlpha > targetMoon) themeMoonAlpha = Math.max(targetMoon, themeMoonAlpha - 0.025);
+
+        if (isLight) {
+          drawRays(s);
+        } else if (themeMoonAlpha > 0.01) {
+          const combinedAlpha = themeMoonAlpha * scrollMoonAlpha;
+          ctx.save(); ctx.globalAlpha = combinedAlpha;
+          drawMoonStars(s);
+          ctx.restore();
+        }
+
+        if (Math.random() < Math.abs(windX) * 0.04) spawnCloud();
+
+        for (let i = clouds.length-1; i >= 0; i--) {
+          const c = clouds[i]; c.x += c.vel; c.life++;
+          const h = c.maxLife/2;
+          const op = c.life < h ? (c.life/h)*c.maxOp : ((c.maxLife-c.life)/h)*c.maxOp;
+          if (c.life >= c.maxLife) { clouds.splice(i,1); continue; }
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, op);
+          // shadowBlur follows the outer contour of the merged shape — not individual arcs
+          ctx.shadowColor  = isLight ? 'rgba(100,96,90,0.55)' : 'rgba(10,10,10,0.65)';
+          ctx.shadowBlur   = 3;
+          ctx.fillStyle    = isLight ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.4)';
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
+          ctx.arc(c.x+c.r*c.p2x, c.y+c.r*c.p2y, c.r*c.p2r, 0, Math.PI*2);
+          ctx.arc(c.x+c.r*c.p3x, c.y+c.r*c.p3y, c.r*c.p3r, 0, Math.PI*2);
+          if (c.p4) ctx.arc(c.x+c.r*c.p4x, c.y, c.r*c.p4r, 0, Math.PI*2);
+          ctx.fill();
+          ctx.restore();
+        }
+        requestAnimationFrame(drawScene);
+      }
+
+      document.addEventListener('mousemove', e => { windX = (e.clientX/window.innerWidth-0.5)*2; });
+      document.addEventListener('mouseleave', () => { windX = 0; });
+      window.addEventListener('resize', resize);
+      resize();
+      drawScene();
+    })();
+
+    // Wind line canvas effect
+    (function () {
+      const canvas = document.getElementById('wind-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let windX = 0;
+      const particles = [];
+
+      function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      function getColor() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--dim').trim() || '#aaaaaa';
+      }
+
+      function spawn() {
+        if (Math.abs(windX) < 0.1) return;
+        const vel = -windX * (5 + Math.random() * 7);
+        particles.push({
+          x: vel > 0 ? -30 : canvas.width + 30,
+          y: 10 + Math.random() * (canvas.height - 20),
+          vel: vel,
+          len: 12 + Math.random() * 32,
+          opacity: 0,
+          maxOp: 0.45 + Math.random() * 0.35 * Math.abs(windX),
+          done: false
+        });
+      }
+
+      function drawWind() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const color = getColor();
+        if (Math.random() < Math.abs(windX) * 0.5) spawn();
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vel;
+          if (!p.done) {
+            p.opacity += 0.05;
+            if (p.opacity >= p.maxOp) p.done = true;
+          } else {
+            p.opacity -= 0.03;
+          }
+          if (p.opacity <= 0 || p.x < -80 || p.x > canvas.width + 80) {
+            particles.splice(i, 1); continue;
+          }
+          ctx.save();
+          ctx.globalAlpha = p.opacity;
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 0.8;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x - p.len * Math.sign(p.vel), p.y);
+          ctx.stroke();
+          ctx.restore();
+        }
+        requestAnimationFrame(drawWind);
+      }
+
+      document.addEventListener('mousemove', e => {
+        windX = (e.clientX / window.innerWidth - 0.5) * 2;
+      });
+      document.addEventListener('mouseleave', () => { windX = 0; });
+      window.addEventListener('resize', resize);
+      resize();
+      drawWind();
+    })();
+
+    // Leaf interactions — wind only (skewX based on mouse X)
     (function () {
       const wrap = document.querySelector('.hero-leaves-wrap');
       if (!wrap) return;
 
-      let leavesF = document.querySelector('.leaves-full');
-      let leavesM = null;
-      let skew = 0, scrollT = 0, mouseT = 0;
-
-      function update() {
-        const t = Math.min(1, Math.max(0, scrollT + mouseT));
-        wrap.style.transform = 'skewX(' + skew.toFixed(2) + 'deg)';
-        if (leavesF) leavesF.style.opacity = (1 - t).toFixed(3);
-        if (leavesM) leavesM.style.opacity = t.toFixed(3);
-      }
-
-      // Load leafs2.svg and inject as leaves-min
-      fetch('/images/leafs2.svg')
-        .then(function (r) { return r.text(); })
-        .then(function (html) {
-          var modified = html
-            .replace(/<\?xml[^>]*\?>\s*/g, '')
-            .replace(/<defs>[\s\S]*?<\/defs>/g, '')
-            .replace(/cls-1/g, 'lf1')
-            .replace(/cls-2/g, 'lf2')
-            .replace(/cls-3/g, 'lf3')
-            .replace(/cls-4/g, 'lf4')
-            .replace(/<svg /, '<svg class="leaves-min" ');
-          var tmp = document.createElement('div');
-          tmp.innerHTML = modified;
-          var svgEl = tmp.querySelector('svg');
-          if (svgEl) {
-            svgEl.setAttribute('preserveAspectRatio', 'xMidYMax meet');
-            wrap.appendChild(svgEl);
-            leavesM = svgEl;
-            update();
-          }
-        });
-
       document.addEventListener('mousemove', function (e) {
-        skew = (e.clientX / window.innerWidth - 0.5) * 2 * 7;
-        mouseT = (e.clientY / window.innerHeight - 0.5) * 0.6;
-        update();
+        const skew = (e.clientX / window.innerWidth - 0.5) * 2 * 7;
+        wrap.style.transform = 'skewX(' + skew.toFixed(2) + 'deg)';
       });
 
       document.addEventListener('mouseleave', function () {
-        skew = 0; mouseT = 0;
-        update();
+        wrap.style.transform = 'skewX(0deg)';
       });
-
-      window.addEventListener('scroll', function () {
-        var hero = document.querySelector('.hero');
-        var heroH = hero ? hero.offsetHeight : 600;
-        scrollT = Math.min(1, window.scrollY / heroH);
-        update();
-      }, { passive: true });
     })();
 
     window.addEventListener('scroll', () => {
