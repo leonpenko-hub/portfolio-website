@@ -136,35 +136,12 @@
         </div>
       </div>
       <div class="hero-photo" aria-hidden="true">
+        <canvas id="sky-canvas"></canvas>
         <div class="hero-sun" id="hero-sun"></div>
         <div class="hero-leaves-wrap">
-        <canvas id="wind-canvas"></canvas>
-        <svg class="leaves-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMax meet">
-          <g><path class="lf3" d="M183.8,347.9l-1.8,1.8,1.8,1.8c1.3,1.3,2.7.9,3.6,0h0c1-1,1-2.6,0-3.5-1.1-1.1-2.6-1.1-3.6,0Z"/><path class="lf3" d="M185.7,305.9c3.5,0,6.3-2.8,6.3-6.3h0c0-3.4-2.6-6.2-6-6.4-3.9-.2-6.7,2.5-6.7,6.3v3.8h-3c-2.1,0-3.8-1.7-3.8-3.8v-2.6c0-.7-.6-1.3-1.3-1.3h0c-.7,0-1.3.6-1.3,1.3v2.6c0,3.5,2.8,6.3,6.3,6.3h3v28.2l-1.8-1.8c-1.4-1.4-2.8-.9-3.7,0h0c-1,1-1.1,2.7,0,3.7,1.1,1.2,2.7,1.2,3.8,0l1.8-1.8v31.9l-1.3-1.3c-1-1-2.1-.7-2.8,0h0c-.7.7-.8,2,0,2.7.8.9,2,.9,2.8,0l1.3-1.3v34.9h2.5c0,0,0-77.1,0-77.1l2.2,2.2c2,2,4.1,1.3,5.3,0h0c1.4-1.4,1.5-3.9.1-5.3-1.6-1.7-3.8-1.7-5.4,0l-2.2,2.2v-17.1h3.8ZM181.9,299.6c0-2.3,1.6-3.9,3.9-3.8,2,0,3.7,1.8,3.7,3.8h0c0,1.8-1,3.8-3.8,3.8h-3.8v-3.8Z"/></g>
-          <g><path class="lf3" d="M336.8,347.9l-1.8,1.8,1.8,1.8c1.3,1.3,2.7.9,3.6,0h0c1-1,1-2.6,0-3.5-1.1-1.1-2.6-1.1-3.6,0Z"/><path class="lf3" d="M338.7,305.9c3.5,0,6.3-2.8,6.3-6.3h0c0-3.4-2.6-6.2-6-6.4-3.9-.2-6.7,2.5-6.7,6.3v3.8h-3c-2.1,0-3.8-1.7-3.8-3.8v-2.6c0-.7-.6-1.3-1.3-1.3h0c-.7,0-1.3.6-1.3,1.3v2.6c0,3.5,2.8,6.3,6.3,6.3h3v28.2l-1.8-1.8c-1.4-1.4-2.8-.9-3.7,0h0c-1,1-1.1,2.7,0,3.7,1.1,1.2,2.7,1.2,3.8,0l1.8-1.8v31.9l-1.3-1.3c-1-1-2.1-.7-2.8,0h0c-.7.7-.8,2,0,2.7.8.9,2,.9,2.8,0l1.3-1.3v34.9h2.5c0,0,0-77.1,0-77.1l2.2,2.2c2,2,4.1,1.3,5.3,0h0c1.4-1.4,1.5-3.9.1-5.3-1.6-1.7-3.8-1.7-5.4,0l-2.2,2.2v-17.1h3.8ZM334.9,299.6c0-2.3,1.6-3.9,3.9-3.8,2,0,3.7,1.8,3.7,3.8h0c0,1.8-1,3.8-3.8,3.8h-3.8v-3.8Z"/></g>
-          <path class="lf3" d="M298.7,230.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v159.4h2.3s0-159.4,0-159.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM301.7,236.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf3" d="M163.7,230.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v159.4h2.3s0-159.4,0-159.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM166.7,236.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf3" d="M281.7,140.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v249.4h2.3s0-249.4,0-249.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM284.7,146.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf3" d="M137.7,140.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v249.4h2.3s0-249.4,0-249.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM140.7,146.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf3" d="M230.7,159.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v230.4h2.3s0-230.4,0-230.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM233.7,165.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf3" d="M100.7,159.4c-3.4-.2-5.9,2.3-5.9,5.6v3.4h-2.7c-1.9,0-3.4-1.5-3.4-3.4v-2.3c0-.6-.5-1.1-1.1-1.1h0c-.6,0-1.1.5-1.1,1.1v2.3c0,3.1,2.5,5.6,5.6,5.6h2.7v230.4h2.3s0-230.4,0-230.4h3.4c3.1,0,5.6-2.5,5.6-5.6h0c0-3-2.3-5.5-5.3-5.7ZM103.7,165.1c0,1.6-.9,3.4-3.4,3.4h-3.4v-3.4c0-2,1.4-3.4,3.5-3.4,1.8,0,3.3,1.6,3.3,3.4h0Z"/>
-          <path class="lf1" d="M95.2,197.4c-6.9-.3-12,4.6-12,11.4v6.9h-5.4c-3.7,0-6.8-3-6.8-6.8v-4.7c0-1.3-1-2.3-2.3-2.3h0c-1.3,0-2.3,1-2.3,2.3v4.7c0,6.3,5.1,11.3,11.3,11.3h5.4v180.8h4.6c0,0,0-180.8,0-180.8h6.8c6.3,0,11.3-5.1,11.3-11.3h0c0-6.1-4.7-11.2-10.7-11.5ZM101.4,208.9c0,3.3-1.8,6.8-6.8,6.8h-6.8v-6.9c0-4.1,2.9-6.9,7-6.8,3.6,0,6.6,3.3,6.6,6.9h0Z"/>
-          <path class="lf1" d="M152.6,150.2c6.3,0,11.3-5.1,11.3-11.3h0c0-6.1-4.7-11.2-10.7-11.5-6.9-.3-12,4.6-12,11.4v6.9h-5.4c-3.7,0-6.8-3-6.8-6.8v-4.7c0-1.3-1-2.3-2.3-2.3h0c-1.3,0-2.3,1-2.3,2.3v4.7c0,6.3,5.1,11.3,11.3,11.3h5.4v50.5l-3.3-3.3c-2.5-2.5-5.1-1.6-6.7,0h0c-1.8,1.8-1.9,4.8-.2,6.6,2,2.1,4.8,2.1,6.8,0l3.3-3.3v200.2h4.6c0,0,0-171.3,0-171.3l2.3,2.3c2.4,2.4,4.8,1.5,6.4,0h0c1.7-1.7,1.8-4.6.2-6.4-1.9-2-4.6-2-6.5,0l-2.4,2.4v-45.3l3.9,3.9c3.5,3.5,7.3,2.3,9.6,0h0c2.6-2.6,2.7-6.9.2-9.6-2.8-3-6.9-3-9.8-.1l-4,4v-30.8h6.8ZM145.8,138.8c0-4.1,2.9-6.9,7-6.8,3.6,0,6.6,3.3,6.6,6.9h0c0,3.3-1.8,6.8-6.8,6.8h-6.8v-6.9Z"/>
-          <path class="lf1" d="M128.5,316.1c4.7,0,8.5-3.8,8.5-8.5h0c0-4.5-3.5-8.4-8-8.6-5.2-.2-9,3.4-9,8.5v5.1h-4c-2.8,0-5.1-2.3-5.1-5.1v-3.5c0-.9-.8-1.7-1.7-1.7h0c-.9,0-1.7.8-1.7,1.7v3.5c0,4.7,3.8,8.5,8.5,8.5h4v37.8l-2.4-2.4c-1.8-1.8-3.8-1.2-5,0h0c-1.3,1.3-1.4,3.6-.1,5,1.5,1.5,3.6,1.6,5.1,0l2.5-2.5v47.1h3.4c0,0,0-60.7,0-60.7l2.9,2.9c2.6,2.6,5.4,1.7,7.2,0h0c1.9-1.9,2-5.2.2-7.1-2.1-2.2-5.1-2.3-7.3,0l-3,3v-23h5.1ZM123.4,307.5c0-3.1,2.2-5.2,5.2-5.1,2.7,0,4.9,2.5,4.9,5.2h0c0,2.5-1.3,5.1-5.1,5.1h-5.1v-5.1Z"/>
-          <path class="lf1" d="M286.5,316.1c4.7,0,8.5-3.8,8.5-8.5h0c0-4.5-3.5-8.4-8-8.6-5.2-.2-9,3.4-9,8.5v5.1h-4c-2.8,0-5.1-2.3-5.1-5.1v-3.5c0-.9-.8-1.7-1.7-1.7h0c-.9,0-1.7.8-1.7,1.7v3.5c0,4.7,3.8,8.5,8.5,8.5h4v37.8l-2.4-2.4c-1.8-1.8-3.8-1.2-5,0h0c-1.3,1.3-1.4,3.6-.1,5,1.5,1.5,3.6,1.6,5.1,0l2.5-2.5v47.1h3.4c0,0,0-60.7,0-60.7l2.9,2.9c2.6,2.6,5.4,1.7,7.2,0h0c1.9-1.9,2-5.2.2-7.1-2.1-2.2-5.1-2.3-7.3,0l-3,3v-23h5.1ZM281.4,307.5c0-3.1,2.2-5.2,5.2-5.1,2.7,0,4.9,2.5,4.9,5.2h0c0,2.5-1.3,5.1-5.1,5.1h-5.1v-5.1Z"/>
-          <path class="lf1" d="M250.2,127.4c-6.9-.3-12,4.6-12,11.4v6.9h-5.4c-3.7,0-6.8-3-6.8-6.8v-4.7c0-1.3-1-2.3-2.3-2.3h0c-1.3,0-2.3,1-2.3,2.3v4.7c0,6.3,5.1,11.3,11.3,11.3h5.4v250.8h4.6c0,0,0-250.8,0-250.8h6.8c6.3,0,11.3-5.1,11.3-11.3h0c0-6.1-4.7-11.2-10.7-11.5ZM256.4,138.9c0,3.3-1.8,6.8-6.8,6.8h-6.8v-6.9c0-4.1,2.9-6.9,7-6.8,3.6,0,6.6,3.3,6.6,6.9h0Z"/>
-          <path class="lf1" d="M328.2,127.4c-6.9-.3-12,4.6-12,11.4v6.9h-5.4c-3.7,0-6.8-3-6.8-6.8v-4.7c0-1.3-1-2.3-2.3-2.3h0c-1.3,0-2.3,1-2.3,2.3v4.7c0,6.3,5.1,11.3,11.3,11.3h5.4v250.8h4.6c0,0,0-250.8,0-250.8h6.8c6.3,0,11.3-5.1,11.3-11.3h0c0-6.1-4.7-11.2-10.7-11.5ZM334.4,138.9c0,3.3-1.8,6.8-6.8,6.8h-6.8v-6.9c0-4.1,2.9-6.9,7-6.8,3.6,0,6.6,3.3,6.6,6.9h0Z"/>
-          <g><path class="lf1" d="M200.2,185.6l-3.2,3.2,3.2,3.2c2.4,2.4,4.8,1.5,6.4,0h0c1.7-1.7,1.8-4.6.2-6.4-1.9-2-4.6-2-6.5,0Z"/><path class="lf1" d="M203.6,110.2c6.3,0,11.3-5.1,11.3-11.3h0c0-6.1-4.7-11.2-10.7-11.5-6.9-.3-12,4.6-12,11.4v6.9h-5.4c-3.7,0-6.8-3-6.8-6.8v-4.7c0-1.3-1-2.3-2.3-2.3h0c-1.3,0-2.3,1-2.3,2.3v4.7c0,6.3,5.1,11.3,11.3,11.3h5.4v50.5l-3.3-3.3c-2.5-2.5-5.1-1.6-6.7,0h0c-1.8,1.8-1.9,4.8-.2,6.6,2,2.1,4.8,2.1,6.8,0l3.3-3.3v57.3l-2.4-2.4c-1.8-1.8-3.8-1.2-4.9,0h0c-1.3,1.3-1.4,3.6-.1,4.9,1.5,1.5,3.5,1.6,5,0l2.4-2.4v182.6h4.6c0,0,0-258.3,0-258.3l3.9,3.9c3.5,3.5,7.3,2.3,9.6,0h0c2.6-2.6,2.7-6.9.2-9.6-2.8-3-6.9-3-9.8-.1l-4,4v-30.8h6.8ZM196.8,98.8c0-4.1,2.9-6.9,7-6.8,3.6,0,6.6,3.3,6.6,6.9h0c0,3.3-1.8,6.8-6.8,6.8h-6.8v-6.9Z"/></g>
-          <path class="lf2" d="M129.7,391.1h0c0-5.4-4.4-10.1-9.7-10.3-6.1-.1-10.4,4.1-10.4,10.1v10.2h10.1c7.4,0,10.1-5.2,10.1-10.1Z"/>
-          <path class="lf4" d="M114.6,389.4l-4.8,4.8,4.7,4.7c3.5,3.5,7.2,2.3,9.5,0h0c2.5-2.5,2.7-6.8.2-9.4-2.8-2.9-6.8-3-9.7-.1Z"/>
-          <path class="lf3" d="M208.9,143.6c-3.6-.2-6.2,2.4-6.2,5.9v3.6h-2.8c-1.9,0-3.5-1.6-3.5-3.5v-2.4c0-.7-.5-1.2-1.2-1.2h0c-.7,0-1.2.5-1.2,1.2v2.4c0,3.3,2.6,5.9,5.9,5.9h2.8v26.2l-1.7-1.7c-1.3-1.3-2.6-.8-3.5,0h0c-.9.9-1,2.5,0,3.4,1,1.1,2.5,1.1,3.5,0l1.7-1.7v29.8l-1.2-1.2c-.9-.9-1.9-.6-2.6,0h0c-.7.7-.7,1.9,0,2.6.8.8,1.8.8,2.6,0l1.2-1.2v189.5h2.4s0-228.8,0-228.8l2,2c1.8,1.8,3.8,1.2,5,0h0c1.3-1.3,1.4-3.6.1-5-1.5-1.5-3.6-1.6-5.1,0l-2.1,2.1v-16h3.5c3.3,0,5.9-2.6,5.9-5.9h0c0-3.2-2.4-5.8-5.5-6ZM212.1,149.5c0,1.7-.9,3.5-3.5,3.5h-3.5v-3.6c0-2.1,1.5-3.6,3.6-3.5,1.9,0,3.4,1.7,3.4,3.6h0Z"/>
-          <path class="lf4" d="M228,227.1c8.8,0,15.9-7.1,15.9-15.9h0c0-8.5-6.6-15.7-15-16.1-9.7-.5-16.9,6.4-16.9,16v9.7h-7.6c-5.3,0-9.5-4.3-9.5-9.5v-6.5c0-1.8-1.4-3.2-3.2-3.2h0c-1.8,0-3.2,1.4-3.2,3.2v6.5c0,8.8,7.1,15.9,15.9,15.9h7.6v71l-4.6-4.6c-3.5-3.5-7.1-2.3-9.4,0h0c-2.5,2.5-2.7,6.8-.2,9.3,2.8,2.9,6.7,2.9,9.5.1l4.7-4.7v102.8h6.4c0,.1,0-128.3,0-128.3l5.5,5.5c5,5,10.2,3.3,13.5,0h0c3.6-3.6,3.8-9.7.3-13.4-4-4.2-9.7-4.2-13.7-.2l-5.6,5.6v-43.2h9.5ZM218.5,211c0-5.8,4.1-9.7,9.8-9.6,5.1.1,9.2,4.6,9.2,9.7h0c0,4.6-2.5,9.6-9.5,9.6h-9.5v-9.7Z"/>
-          <path class="lf4" d="M321,307.1c8.8,0,15.9-7.1,15.9-15.9h0c0-8.5-6.6-15.7-15-16.1-9.7-.5-16.9,6.4-16.9,16v9.7h-7.6c-5.3,0-9.5-4.3-9.5-9.5v-6.5c0-1.8-1.4-3.2-3.2-3.2h0c-1.8,0-3.2,1.4-3.2,3.2v6.5c0,8.8,7.1,15.9,15.9,15.9h7.6v71l-4.6-4.6c-3.5-3.5-7.1-2.3-9.4,0h0c-2.5,2.5-2.7,6.8-.2,9.3,2.8,2.9,6.7,2.9,9.5.1l4.7-4.7v22.8h6.4c0,.1,0-48.3,0-48.3l5.5,5.5c5,5,10.2,3.3,13.5,0h0c3.6-3.6,3.8-9.7.3-13.4-4-4.2-9.7-4.2-13.7-.2l-5.6,5.6v-43.2h9.5ZM311.5,291c0-5.8,4.1-9.7,9.8-9.6,5.1.1,9.2,4.6,9.2,9.7h0c0,4.6-2.5,9.6-9.5,9.6h-9.5v-9.7Z"/>
-          <path class="lf4" d="M81.3,338.4c5.9,0,10.6-4.8,10.6-10.6h0c0-5.7-4.4-10.5-10-10.8-6.5-.3-11.2,4.3-11.2,10.7v6.4h-5c-3.5,0-6.4-2.8-6.4-6.4v-4.4c0-1.2-1-2.1-2.1-2.1h0c-1.2,0-2.1,1-2.1,2.1v4.4c0,5.9,4.8,10.6,10.6,10.6h5v47.3l-3.1-3.1c-2.3-2.3-4.7-1.5-6.2,0h0c-1.7,1.7-1.8,4.5-.2,6.2,1.8,1.9,4.5,2,6.4,0l3.1-3.1v15.2h4.3c0,0,0-32.2,0-32.2l3.7,3.7c3.3,3.3,6.8,2.2,9,0h0c2.4-2.4,2.6-6.5.2-8.9-2.7-2.8-6.4-2.8-9.2-.1l-3.7,3.7v-28.8h6.4ZM74.9,327.7c0-3.8,2.7-6.5,6.6-6.4,3.4,0,6.2,3.1,6.2,6.5h0c0,3.1-1.7,6.4-6.4,6.4h-6.4v-6.4Z"/>
-          <path class="lf4" d="M180.9,277.3c11.6,0,21-9.4,21-21h0c0-11.2-8.6-20.7-19.8-21.2-12.8-.6-22.2,8.4-22.2,21.1v12.7h-10c-6.9,0-12.6-5.6-12.6-12.6v-8.6c0-2.3-1.9-4.2-4.2-4.2h0c-2.3,0-4.2,1.9-4.2,4.2v8.6c0,11.6,9.4,21,21,21h10v93.5l-6-6c-4.5-4.5-9.3-3-12.3,0h0c-3.3,3.3-3.5,8.9-.3,12.3,3.6,3.8,8.8,3.9,12.6.1l6.1-6.1v30l8.4.2v-63.8l7.3,7.3c6.5,6.5,13.5,4.3,17.8,0h0c4.7-4.8,5.1-12.8.4-17.7-5.2-5.5-12.7-5.6-18.1-.2l-7.4,7.4v-56.9h12.6ZM168.4,256.1c0-7.6,5.3-12.8,12.9-12.6,6.7.2,12.2,6.1,12.2,12.8h0c0,6.1-3.3,12.6-12.6,12.6h-12.6v-12.7Z"/>
-          <g><path class="lf4" d="M270,275.4l-4.3,4.3,4.2,4.2c3.1,3.1,6.4,2,8.4,0h0c2.2-2.3,2.4-6.1.2-8.4-2.5-2.6-6-2.6-8.6,0Z"/><path class="lf4" d="M274.5,176.1c8.3,0,14.9-6.7,14.9-14.9h0c0-8-6.1-14.7-14.1-15.1-9.1-.4-15.8,6-15.8,15v9.1h-7.1c-4.9,0-8.9-4-8.9-8.9v-6.1c0-1.7-1.3-3-3-3h0c-1.7,0-3,1.3-3,3v6.1c0,8.3,6.7,14.9,14.9,14.9h7.1v66.5l-4.3-4.3c-3.2-3.2-6.7-2.1-8.8,0h0c-2.3,2.4-2.5,6.3-.2,8.7,2.6,2.7,6.3,2.8,8.9.1l4.4-4.4v75.5l-3.1-3.1c-2.4-2.4-4.9-1.6-6.5,0h0c-1.7,1.7-1.9,4.7-.2,6.5,1.9,2,4.7,2,6.6,0l3.2-3.2v82.4h6c0,.1,0-182.2,0-182.2l5.2,5.2c4.7,4.7,9.6,3.1,12.6,0h0c3.4-3.4,3.6-9.1.3-12.6-3.7-3.9-9.1-4-12.9-.1l-5.3,5.3v-40.5h8.9ZM265.6,161c0-5.4,3.8-9.1,9.2-9,4.8.1,8.7,4.3,8.7,9.1h0c0,4.3-2.3,9-8.9,9h-8.9v-9.1Z"/></g>
-          <path class="lf4" d="M119.6,147.8c9.3,0,16.8-7.5,16.8-16.8h0c0-9-6.9-16.6-15.8-17-10.2-.5-17.8,6.8-17.8,16.9v10.2h-8c-5.6,0-10.1-4.5-10.1-10.1v-6.9c0-1.9-1.5-3.4-3.4-3.4h0c-1.9,0-3.4,1.5-3.4,3.4v6.9c0,9.3,7.5,16.8,16.8,16.8h8v74.9l-4.8-4.8c-3.6-3.6-7.5-2.4-9.9,0h0c-2.6,2.7-2.8,7.1-.2,9.8,2.9,3.1,7.1,3.1,10.1.1l4.9-4.9v85l-3.5-3.5c-2.7-2.7-5.6-1.8-7.3,0h0c-2,2-2.1,5.3-.2,7.3,2.2,2.3,5.3,2.3,7.5,0l3.6-3.6v92.8h6.8c0,.1,0-205,0-205l5.8,5.8c5.2,5.2,10.8,3.4,14.2,0h0c3.8-3.8,4.1-10.3.3-14.2-4.2-4.4-10.2-4.5-14.5-.2l-5.9,5.9v-45.6h10.1ZM109.6,130.9c0-6.1,4.3-10.3,10.4-10.1,5.4.1,9.7,4.9,9.7,10.2h0c0,4.9-2.6,10.1-10.1,10.1h-10.1v-10.2Z"/>
-        </svg>
+          <canvas id="wind-canvas"></canvas>
+          <img class="leaves-themed leaves-black" src="images/leafs_white.svg" alt="">
+          <img class="leaves-themed leaves-white" src="images/leafs_black.svg" alt="">
         </div><!-- /.hero-leaves-wrap -->
         <canvas id="cloud-canvas"></canvas>
       </div>
@@ -291,186 +268,203 @@
         const hero = document.querySelector('.hero');
         const heroH = hero ? hero.offsetHeight : 600;
         const p = Math.min(1, window.scrollY / heroH);
-        sun.style.transform = 'translateY(' + (p * 440) + 'px)';
+        sun.style.transform = 'translateY(' + (p * 80) + 'px)';
         if (document.body.classList.contains('light')) {
-          sun.style.opacity = Math.max(0, 1 - p * 1.8);
+          sun.style.opacity = Math.max(0, 1 - p * 1.2);
         } else {
-          sun.style.removeProperty('opacity'); // let CSS handle dark mode
+          sun.style.removeProperty('opacity');
         }
       }, { passive: true });
     })();
 
-    // Cloud canvas — rays (light), moon+stars (dark), clouds on wind
+    // Preload sky SVGs once
+    var _sky = {};
+    (function () {
+      function loadSVG(path, color) {
+        return fetch(path).then(r => r.text()).then(txt => {
+          const blob = new Blob([txt.replace(/currentColor/g, color)], {type:'image/svg+xml'});
+          const url = URL.createObjectURL(blob);
+          return new Promise(res => {
+            const img = new Image();
+            img.onload = () => { URL.revokeObjectURL(url); res(img); };
+            img.src = url;
+          });
+        });
+      }
+      Promise.all([
+        loadSVG('/images/moon.svg',    '#2E3642'),
+        loadSVG('/images/clouds.svg',  '#dddad4'),
+        loadSVG('/images/clouds.svg',  '#2E3642'),
+        loadSVG('/images/stars.svg',   '#2E3642')
+      ]).then(([m,cd,cn,s]) => { _sky.moon = m; _sky.cloudDay = cd; _sky.cloudNight = cn; _sky.star = s; });
+    })();
+
+    // Sky canvas — moon + stars BEHIND plants (z-index: 0)
+    (function () {
+      const cc = document.getElementById('sky-canvas');
+      if (!cc) return;
+      const ctx = cc.getContext('2d');
+
+      const STARS = Array.from({length: 14}, () => ({
+        rx: 0.04 + Math.random()*0.90, ry: 0.02 + Math.random()*0.33,
+        scale: 0.55 + Math.random()*0.9, ph: Math.random()*Math.PI*2
+      }));
+
+      let themeMoonAlpha = 0, scrollDrop = 0, scrollMoonAlpha = 1;
+
+      function resize() { cc.width = cc.offsetWidth||480; cc.height = cc.offsetHeight||480; }
+      function light()  { return document.body.classList.contains('light'); }
+
+      window.addEventListener('scroll', function () {
+        const p = Math.min(1, window.scrollY / (document.querySelector('.hero')?.offsetHeight||600));
+        scrollDrop = p * 80;
+        scrollMoonAlpha = Math.max(0, 1 - p * 1.2);
+      }, { passive: true });
+
+      function drawSky() {
+        ctx.clearRect(0, 0, cc.width, cc.height);
+        if (light() && !window._moonForceDraw) { requestAnimationFrame(drawSky); return; }
+
+        const tgt = 1;
+        if (themeMoonAlpha < tgt) themeMoonAlpha = Math.min(tgt, themeMoonAlpha + 0.025);
+
+        const alpha = window._moonForceDraw
+          ? (window._moonFadeOverride !== undefined ? window._moonFadeOverride : 1)
+          : themeMoonAlpha * scrollMoonAlpha;
+        if (alpha < 0.01) { requestAnimationFrame(drawSky); return; }
+        if (!_sky.moon || !_sky.star) { requestAnimationFrame(drawSky); return; }
+
+        const t = Date.now() * 0.001;
+        const sx = cc.width - 41;
+        const sy = 35 + scrollDrop + (window._moonExtraY || 0);
+
+        ctx.save(); ctx.globalAlpha = alpha;
+        ctx.drawImage(_sky.moon, sx - 23, sy - 23, 46, 46);
+        ctx.restore();
+
+        if (!window._moonForceDraw) {
+          STARS.forEach(st => {
+            const op = alpha * (0.22 + 0.32 * Math.sin(st.ph + t * 0.22));
+            const sz = st.scale * 7;
+            ctx.save(); ctx.globalAlpha = Math.max(0, op);
+            ctx.drawImage(_sky.star,
+              st.rx * cc.width - sz/2,
+              st.ry * cc.height + scrollDrop - sz/2,
+              sz, sz);
+            ctx.restore();
+          });
+        }
+
+        requestAnimationFrame(drawSky);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      drawSky();
+
+      // Reset on theme change
+      var lastLight = light();
+      setInterval(function () {
+        const l = light();
+        if (l !== lastLight) {
+          themeMoonAlpha = l ? 0 : themeMoonAlpha;
+          lastLight = l;
+        }
+      }, 100);
+    })();
+
+    // Cloud canvas — clouds ABOVE plants (z-index: 3), with edge fade
     (function () {
       const cc = document.getElementById('cloud-canvas');
       if (!cc) return;
       const ctx = cc.getContext('2d');
       const clouds = [];
-      let windX = 0, rayAngle = 0;
+      let windX = 0, rayAngle = 0, scrollDrop = 0;
 
-      // Stars spread across sky (upper 70% of canvas = above plants)
-      const STARS = Array.from({length: 14}, () => ({
-        rx: 0.03 + Math.random() * 0.94,
-        ry: 0.02 + Math.random() * 0.65,
-        r:  0.6 + Math.random() * 1.3,
-        ph: Math.random() * Math.PI * 2
-      }));
+      const CLOUD_SIZES = [[38,13],[54,18],[70,23]];
+      const EDGE_FADE = 40; // px from edge to start fading
 
-      let themeMoonAlpha = 0; // 0=hidden, 1=fully visible — animates on theme change
-      let scrollDrop = 0, scrollMoonAlpha = 1;
-
-      function resize() { cc.width = cc.offsetWidth || 480; cc.height = cc.offsetHeight || 480; }
-      function sp()    { return { x: cc.width - 41, y: 41 + scrollDrop }; }
+      function resize() { cc.width = cc.offsetWidth||480; cc.height = cc.offsetHeight||480; }
+      function sp()    { return { x: cc.width - 41, y: 35 + scrollDrop }; }
       function light() { return document.body.classList.contains('light'); }
-
-      window.addEventListener('scroll', function () {
-        const hero = document.querySelector('.hero');
-        const heroH = hero ? hero.offsetHeight : 600;
-        const p = Math.min(1, window.scrollY / heroH);
-        scrollDrop = p * 440;
-        scrollMoonAlpha = Math.max(0, 1 - p * 1.8);
-      }, { passive: true });
-      // Fix: read from body to capture body.light overrides
       function v(n)    { return getComputedStyle(document.body).getPropertyValue(n).trim(); }
-
-      function hexToRgba(hex, a) {
-        hex = (hex || '#aaaaaa').replace('#','');
-        if (hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
-        const r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
-        return 'rgba('+r+','+g+','+b+','+a+')';
+      function hexA(hex, a) {
+        hex = (hex||'#aaa').replace('#','');
+        if (hex.length===3) hex=hex.split('').map(c=>c+c).join('');
+        return 'rgba('+parseInt(hex.slice(0,2),16)+','+parseInt(hex.slice(2,4),16)+','+parseInt(hex.slice(4,6),16)+','+a+')';
       }
 
+      window.addEventListener('scroll', function () {
+        const p = Math.min(1, window.scrollY / (document.querySelector('.hero')?.offsetHeight||600));
+        scrollDrop = p * 80;
+      }, { passive: true });
+
       function drawRays(s) {
-        const R = 23, N = 14, step = (Math.PI*2) / N;
+        const R = 23, N = 14, step = (Math.PI*2)/N;
         const col = v('--leaf-front') || '#c8c5c0';
         const t = Date.now() * 0.0006;
         for (let i = 0; i < N; i++) {
-          const ang  = rayAngle + i * step;
-          const long = i % 2 === 0;
-          // amorphic length: base + two sine waves with different phases per ray
-          const wave = Math.sin(t * 1.1 + i * 1.3) * 3.5 + Math.sin(t * 0.7 + i * 2.1) * 2;
-          const len  = Math.max(4, (long ? 15 : 7) + wave);
-          const x1 = s.x + Math.cos(ang) * (R + 3);
-          const y1 = s.y + Math.sin(ang) * (R + 3);
-          const x2 = s.x + Math.cos(ang) * (R + 3 + len);
-          const y2 = s.y + Math.sin(ang) * (R + 3 + len);
-          const g  = ctx.createLinearGradient(x1, y1, x2, y2);
-          g.addColorStop(0, hexToRgba(col, long ? 0.65 : 0.42));
-          g.addColorStop(1, hexToRgba(col, 0));
+          const ang = rayAngle + i*step, long = i%2===0;
+          const wave = Math.sin(t*1.1 + i*1.3)*3.5 + Math.sin(t*0.7 + i*2.1)*2;
+          const len = Math.max(4, (long?15:7) + wave);
+          const x1=s.x+Math.cos(ang)*(R+3), y1=s.y+Math.sin(ang)*(R+3);
+          const x2=s.x+Math.cos(ang)*(R+3+len), y2=s.y+Math.sin(ang)*(R+3+len);
+          const g = ctx.createLinearGradient(x1,y1,x2,y2);
+          g.addColorStop(0, hexA(col, long?0.65:0.42));
+          g.addColorStop(1, hexA(col, 0));
           ctx.save();
-          ctx.strokeStyle = g;
-          ctx.lineWidth = long ? 1.3 : 0.75;
-          ctx.lineCap = 'round';
+          ctx.strokeStyle=g; ctx.lineWidth=long?1.3:0.75; ctx.lineCap='round';
           ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
           ctx.restore();
         }
         rayAngle += 0.00035;
       }
 
-      // Offscreen canvas for moon crescent (created once, reused)
-      const moonOff = document.createElement('canvas');
-      moonOff.width = 80; moonOff.height = 80;
-      const moonOffCtx = moonOff.getContext('2d');
-      const MOX = 40, MOY = 40, MR = 20;
-
-      function drawMoonStars(s) {
-        const col = v('--leaf-mid') || '#333333';
-        const t   = Date.now() * 0.001;
-
-        // --- Crescent via offscreen canvas ---
-        moonOffCtx.clearRect(0, 0, 80, 80);
-        // Full moon circle
-        moonOffCtx.fillStyle = hexToRgba(col, 0.92);
-        moonOffCtx.beginPath();
-        moonOffCtx.arc(MOX, MOY, MR, 0, Math.PI*2);
-        moonOffCtx.fill();
-        // Cut bite with destination-out
-        moonOffCtx.globalCompositeOperation = 'destination-out';
-        moonOffCtx.fillStyle = 'rgba(0,0,0,1)';
-        moonOffCtx.beginPath();
-        moonOffCtx.arc(MOX + MR*0.65, MOY - MR*0.1, MR*0.85, 0, Math.PI*2);
-        moonOffCtx.fill();
-        moonOffCtx.globalCompositeOperation = 'source-over';
-        // Stamp onto main canvas at moon position
-        ctx.drawImage(moonOff, s.x - MOX, s.y - MOY);
-
-        // --- Stars (fixed position, use combined alpha from caller) ---
-        const parentAlpha = ctx.globalAlpha;
-        STARS.forEach(st => {
-          ctx.save();
-          ctx.globalAlpha = parentAlpha * (0.3 + 0.4 * Math.sin(st.ph + t * 0.9));
-          ctx.fillStyle = hexToRgba(col, 1);
-          ctx.beginPath();
-          ctx.arc(st.rx * cc.width, st.ry * cc.height, st.r, 0, Math.PI*2);
-          ctx.fill();
-          ctx.restore();
-        });
-      }
-
       function spawnCloud() {
         if (Math.abs(windX) < 0.15 || clouds.length >= 3) return;
         const s = sp();
-        for (const c of clouds) { if (Math.hypot(c.x-s.x, c.y-s.y) < 22) return; }
-        const a = Math.random()*Math.PI*2, d = 6 + Math.random()*20;
+        for (const c of clouds) { if (Math.hypot(c.x-s.x, c.y-s.y)<24) return; }
+        const a = Math.random()*Math.PI*2, d = 8+Math.random()*22;
+        const [cw,ch] = CLOUD_SIZES[Math.floor(Math.random()*3)];
+        const isDay = light();
         clouds.push({
           x: s.x+Math.cos(a)*d, y: s.y+Math.sin(a)*d,
-          vel: -windX*(0.2+Math.random()*0.35),
-          r: 7+Math.random()*7,
-          p2x: 0.55+Math.random()*0.7,  p2y: -0.4+Math.random()*0.45, p2r: 0.5+Math.random()*0.35,
-          p3x:-(0.45+Math.random()*0.5), p3y: -0.25+Math.random()*0.3, p3r: 0.4+Math.random()*0.3,
-          p4: Math.random()>0.42, p4x: 1.1+Math.random()*0.55, p4r: 0.28+Math.random()*0.28,
-          life: 0, maxLife: 110+Math.random()*90, maxOp: 0.92
+          vel: -windX*(0.18+Math.random()*0.28),
+          w: cw, h: ch, life: 0, maxLife: 160+Math.random()*120,
+          maxOp: isDay ? 0.22 : 0.7,
+          img: isDay ? _sky.cloudDay : _sky.cloudNight
         });
       }
 
-      function drawScene() {
+      function drawClouds() {
         ctx.clearRect(0, 0, cc.width, cc.height);
-        const s = sp();
-        const isLight = light();
-
-        // Smooth theme transition for moon
-        const targetMoon = isLight ? 0 : 1;
-        if (themeMoonAlpha < targetMoon) themeMoonAlpha = Math.min(targetMoon, themeMoonAlpha + 0.025);
-        if (themeMoonAlpha > targetMoon) themeMoonAlpha = Math.max(targetMoon, themeMoonAlpha - 0.025);
-
-        if (isLight) {
-          drawRays(s);
-        } else if (themeMoonAlpha > 0.01) {
-          const combinedAlpha = themeMoonAlpha * scrollMoonAlpha;
-          ctx.save(); ctx.globalAlpha = combinedAlpha;
-          drawMoonStars(s);
-          ctx.restore();
-        }
-
-        if (Math.random() < Math.abs(windX) * 0.04) spawnCloud();
-
+        const s = sp(); const isLight = light();
+        if (isLight) drawRays(s);
+        if (Math.random() < Math.abs(windX)*0.04) spawnCloud();
         for (let i = clouds.length-1; i >= 0; i--) {
           const c = clouds[i]; c.x += c.vel; c.life++;
           const h = c.maxLife/2;
-          const op = c.life < h ? (c.life/h)*c.maxOp : ((c.maxLife-c.life)/h)*c.maxOp;
+          const lifeOp = c.life < h ? (c.life/h)*c.maxOp : ((c.maxLife-c.life)/h)*c.maxOp;
           if (c.life >= c.maxLife) { clouds.splice(i,1); continue; }
+          if (!c.img) continue;
+          // Edge fade: soft disappear near left/right canvas edges
+          const edgeFade = Math.min(Math.min(c.x, cc.width-c.x) / EDGE_FADE, 1);
+          const op = lifeOp * Math.max(0, edgeFade);
           ctx.save();
           ctx.globalAlpha = Math.max(0, op);
-          // shadowBlur follows the outer contour of the merged shape — not individual arcs
-          ctx.shadowColor  = isLight ? 'rgba(100,96,90,0.55)' : 'rgba(10,10,10,0.65)';
-          ctx.shadowBlur   = 3;
-          ctx.fillStyle    = isLight ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.4)';
-          ctx.beginPath();
-          ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
-          ctx.arc(c.x+c.r*c.p2x, c.y+c.r*c.p2y, c.r*c.p2r, 0, Math.PI*2);
-          ctx.arc(c.x+c.r*c.p3x, c.y+c.r*c.p3y, c.r*c.p3r, 0, Math.PI*2);
-          if (c.p4) ctx.arc(c.x+c.r*c.p4x, c.y, c.r*c.p4r, 0, Math.PI*2);
-          ctx.fill();
+          ctx.shadowColor = isLight ? 'rgba(100,96,90,0.2)' : 'rgba(8,8,8,0.2)';
+          ctx.shadowBlur  = 3;
+          ctx.drawImage(c.img, c.x-c.w/2, c.y-c.h/2, c.w, c.h);
           ctx.restore();
         }
-        requestAnimationFrame(drawScene);
+        requestAnimationFrame(drawClouds);
       }
 
-      document.addEventListener('mousemove', e => { windX = (e.clientX/window.innerWidth-0.5)*2; });
-      document.addEventListener('mouseleave', () => { windX = 0; });
+      document.addEventListener('mousemove', e => { windX=(e.clientX/window.innerWidth-0.5)*2; });
+      document.addEventListener('mouseleave', () => { windX=0; });
       window.addEventListener('resize', resize);
       resize();
-      drawScene();
+      drawClouds();
     })();
 
     // Wind line canvas effect
@@ -562,6 +556,126 @@
     window.addEventListener('scroll', () => {
       document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 10);
     });
+
+    // ── Sun/Moon click → animated theme transition ──
+    (function () {
+      var busy = false;
+      window._moonExtraY = 0;
+      window._moonForceDraw = false;
+      window._moonFadeOverride = 1;
+
+      function ease(p) { return p < 0.5 ? 2*p*p : -1+(4-2*p)*p; }
+
+      function animVal(from, to, dur, onUpdate, onDone) {
+        var t0 = null;
+        (function frame(t) {
+          if (!t0) t0 = t;
+          var p = Math.min(1, (t - t0) / dur);
+          onUpdate(from + (to - from) * ease(p));
+          if (p < 1) requestAnimationFrame(frame);
+          else if (onDone) onDone();
+        })(performance.now());
+      }
+
+      function applyTheme(dark) {
+        document.body.classList.add('theme-transitioning');
+        if (dark) document.body.classList.remove('light');
+        else      document.body.classList.add('light');
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e){}
+        setTimeout(function() { document.body.classList.remove('theme-transitioning'); }, 1400);
+      }
+
+      // Day → Night: sun sinks, moon rises
+      function sunsetToNight() {
+        if (busy) return; busy = true;
+        var sun = document.getElementById('hero-sun');
+        if (sun) { sun.classList.add('sun-animating'); sun.style.transition = 'none'; }
+
+        animVal(0, 380, 700, function(y) {
+          if (sun) {
+            sun.style.transform = 'translateY(' + y + 'px)';
+            sun.style.opacity   = Math.max(0, 1 - y/280).toString();
+          }
+        });
+
+        setTimeout(function() {
+          applyTheme(true);
+          window._moonExtraY = 350;
+          animVal(350, 0, 650, function(y) { window._moonExtraY = y; });
+        }, 350);
+
+        setTimeout(function() {
+          if (sun) {
+            sun.style.cssText = '';
+            sun.classList.remove('sun-animating');
+          }
+          busy = false;
+        }, 1400);
+      }
+
+      // Night → Day: moon sinks, sun rises
+      function moonriseToDay() {
+        if (busy) return; busy = true;
+
+        window._moonForceDraw = true;
+        window._moonFadeOverride = 1;
+        window._moonExtraY = 0;
+        animVal(0, 380, 700, function(y) {
+          window._moonExtraY      = y;
+          window._moonFadeOverride = Math.max(0, 1 - y/280);
+        }, function() {
+          window._moonForceDraw    = false;
+          window._moonExtraY       = 0;
+          window._moonFadeOverride = 1;
+        });
+
+        setTimeout(function() {
+          applyTheme(false);
+          var sun = document.getElementById('hero-sun');
+          if (sun) {
+            sun.classList.add('sun-animating');
+            sun.style.cssText = 'transition:none;transform:translateY(380px);opacity:0';
+            setTimeout(function() {
+              animVal(380, 0, 650, function(y) {
+                sun.style.transform = 'translateY(' + y + 'px)';
+                sun.style.opacity   = Math.min(1, (380-y)/280).toString();
+              }, function() {
+                sun.style.cssText = '';
+                sun.classList.remove('sun-animating');
+              });
+            }, 50);
+          }
+        }, 350);
+
+        setTimeout(function() { busy = false; }, 1400);
+      }
+
+      // Sun click
+      var sunEl = document.getElementById('hero-sun');
+      if (sunEl) sunEl.addEventListener('click', function() {
+        if (document.body.classList.contains('light')) sunsetToNight();
+      });
+
+      // Moon click on sky-canvas
+      var skyC = document.getElementById('sky-canvas');
+      if (skyC) {
+        skyC.style.pointerEvents = 'auto';
+        skyC.addEventListener('mousemove', function(e) {
+          if (document.body.classList.contains('light')) { skyC.style.cursor = 'default'; return; }
+          var r = skyC.getBoundingClientRect();
+          var cx = (e.clientX - r.left) * (skyC.width / r.width);
+          var cy = (e.clientY - r.top)  * (skyC.height / r.height);
+          skyC.style.cursor = Math.hypot(cx - (skyC.width-41), cy - (35 + (window._moonExtraY||0))) < 32 ? 'pointer' : 'default';
+        });
+        skyC.addEventListener('click', function(e) {
+          if (document.body.classList.contains('light')) return;
+          var r = skyC.getBoundingClientRect();
+          var cx = (e.clientX - r.left) * (skyC.width / r.width);
+          var cy = (e.clientY - r.top)  * (skyC.height / r.height);
+          if (Math.hypot(cx - (skyC.width-41), cy - (35 + (window._moonExtraY||0))) < 32) moonriseToDay();
+        });
+      }
+    })();
 
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
