@@ -25,6 +25,15 @@
       height: min(420px, 55vh);
     }
 
+    @media (min-width: 901px) {
+      .about-header { padding-top: 115px; }
+      .about-header .hero-photo {
+        position: relative;
+        left: -50px;
+      }
+      .about-header .hero-photo img { height: min(483px, 60vh); }
+    }
+
     .about-header-text {
       flex: 1;
       padding-bottom: 88px;
@@ -178,13 +187,14 @@
     }
 
     .life-title {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 400;
+      font-family: 'Montserrat', 'Inter', sans-serif;
       color: var(--fg);
     }
 
     .life-desc {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--muted);
       line-height: 1.65;
     }
@@ -206,7 +216,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--bg);
@@ -219,38 +229,162 @@
 
     .cv-download:hover { opacity: 0.8; }
 
+    /* ── Timeline cards ── */
+    .cv-timeline {
+      position: relative;
+    }
+
+    .cv-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-0.5px);
+      top: 28px;
+      bottom: 28px;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent,
+        var(--border) 6%,
+        var(--border) 94%,
+        transparent);
+    }
+
+    /* Zigzag: 3-column grid — left wrap | node | right wrap */
     .cv-role {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 32px;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 1fr 40px 1fr;
+      gap: 0 6px;
+      padding: 8px 0;
+      align-items: flex-start;
     }
 
-    .cv-role:last-of-type { border-bottom: none; }
+    /* Node always in center */
+    .cv-node { grid-column: 2; }
+
+    /* Odd rows: wrap LEFT */
+    .cv-role:nth-child(odd) .cv-card-wrap { grid-column: 1; grid-row: 1; text-align: right; }
+    .cv-role:nth-child(odd) .cv-node      { grid-column: 2; grid-row: 1; }
+
+    /* Even rows: wrap RIGHT */
+    .cv-role:nth-child(even) .cv-card-wrap { grid-column: 3; grid-row: 1; text-align: left; }
+    .cv-role:nth-child(even) .cv-node      { grid-column: 2; grid-row: 1; }
+
+    .cv-card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Keep card text always LTR */
+    .cv-card-wrap .cv-card { text-align: left; }
+
+    .cv-node {
+      display: flex;
+      justify-content: center;
+      padding-top: 5px;
+      position: relative;
+    }
+
+    .cv-node::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dim);
+      border: none;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    /* ── Card flip ── */
+    .cv-card {
+      position: relative;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    /* Front stays in flow → card height = its content */
+    .cv-card-front {
+      border-radius: 12px;
+      padding: 20px 24px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.55s ease;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transform: rotateY(0deg);
+    }
+
+    /* Back overlays at same height */
+    .cv-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 20px 24px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.55s ease;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cv-card-back  { transform: rotateY(-180deg); }
+
+    /* Odd (left cards): flip right */
+    .cv-role:nth-child(odd) .cv-card:hover .cv-card-front  { transform: rotateY(180deg); }
+    .cv-role:nth-child(odd) .cv-card:hover .cv-card-back   { transform: rotateY(0deg); }
+
+    /* Even (right cards): flip left */
+    .cv-role:nth-child(even) .cv-card-back                  { transform: rotateY(180deg); }
+    .cv-role:nth-child(even) .cv-card:hover .cv-card-front  { transform: rotateY(-180deg); }
+    .cv-role:nth-child(even) .cv-card:hover .cv-card-back   { transform: rotateY(0deg); }
+
+    .cv-back-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 4px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .cv-back-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
     .cv-period {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--dim);
-      padding-top: 4px;
-      line-height: 1.6;
-    }
-
-    .cv-company {
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--fg);
-      margin-bottom: 3px;
-    }
-
-    .cv-title {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 12px;
       letter-spacing: 0.3px;
     }
 
-    .cv-bullets {
+    .cv-company {
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--fg);
+      margin: 0;
+    }
+
+    .cv-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 4px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+.cv-bullets {
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -260,15 +394,20 @@
     .cv-bullets li {
       font-size: 13px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
       display: flex;
+      align-items: flex-start;
       gap: 10px;
     }
 
     .cv-bullets li::before {
-      content: '—';
-      color: var(--dim);
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--dim);
       flex-shrink: 0;
+      margin-top: 6px;
     }
 
     /* ── Skills ── */
@@ -336,7 +475,7 @@
         text-align: center;
       }
       .about-tabs { justify-content: center; }
-      .hero-photo img {
+      .about-header .hero-photo img {
         height: auto;
         width: 60%;
         max-width: 320px;
@@ -344,7 +483,21 @@
     }
 
     @media (max-width: 600px) {
-      .cv-role { grid-template-columns: 1fr; gap: 8px; }
+      /* Timeline on left, cards full width, stacked */
+      .cv-timeline::before { left: 15px; transform: none; }
+
+      .cv-role { grid-template-columns: 32px 1fr; }
+
+      .cv-role:nth-child(odd) .cv-card-wrap,
+      .cv-role:nth-child(even) .cv-card-wrap {
+        grid-column: 2; grid-row: 1; text-align: left;
+      }
+
+      .cv-role:nth-child(odd) .cv-node,
+      .cv-role:nth-child(even) .cv-node {
+        grid-column: 1; grid-row: 1;
+      }
+
       .edu-row { grid-template-columns: 1fr; gap: 8px; }
       .skills-clusters { grid-template-columns: 1fr; }
       .cv-header-row { flex-direction: column; gap: 20px; align-items: flex-start; }
@@ -403,90 +556,194 @@
         </a>
       </div>
 
+      <div class="cv-timeline">
+
       <div class="cv-role">
-        <div class="cv-period">Jun 2024 — Present</div>
-        <div>
-          <p class="cv-company">Independent Projects</p>
-          <p class="cv-title">Product Design &amp; UX Consultant</p>
-          <ul class="cv-bullets">
-            <li>End-to-end product design across API security and cardiac electrophysiology</li>
-            <li>UX research, definition, and high-fidelity design delivery</li>
-            <li>HUD optimization for a resource management game</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Jun 2024 – Present</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Independent Projects</p>
+              <p class="cv-title">Product Design &amp; UX Consultant</p>
+              <ul class="cv-bullets">
+              <li>End-to-end product design across API security and cardiac electrophysiology</li>
+              <li>UX research, definition, and high-fidelity design delivery</li>
+              <li>HUD optimization for a resource management game</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">UX Research</span>
+              <span class="tag">Product Design</span>
+              <span class="tag">UX Architecture</span>
+              <span class="tag">Vibe Coding</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Jan 2021 — Apr 2024</div>
-        <div>
-          <p class="cv-company">Totango</p>
-          <p class="cv-title">Lead Product Designer</p>
-          <ul class="cv-bullets">
-            <li>Reduced onboarding time by 30% via role-based, self-guided UX flows</li>
-            <li>Increased workflow efficiency up to 70% via AI-driven UX solutions</li>
-            <li>Led design system redesign — accessibility, consistency, scalable implementation</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Jan 2021 – Apr 2024</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Totango</p>
+              <p class="cv-title">Lead Product Designer</p>
+              <ul class="cv-bullets">
+              <li>Reduced onboarding time by 30% via role-based, self-guided UX flows</li>
+              <li>Increased workflow efficiency up to 70% via AI-driven UX solutions</li>
+              <li>Led design system redesign — accessibility, consistency, scalable implementation</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">UX Architecture</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">AI-driven UX</span>
+              <span class="tag">Team Leadership</span>
+              <span class="tag">Competitive Research</span>
+              <span class="tag">User Research</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Jan 2019 — Sep 2020</div>
-        <div>
-          <p class="cv-company">Source Defence</p>
-          <p class="cv-title">Sr. Product Designer</p>
-          <ul class="cv-bullets">
-            <li>Led UX redesign of core cybersecurity platform through research and data insights</li>
-            <li>Aligned engineering, marketing, and sales around customer-centric goals</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Jan 2019 – Sep 2020</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Source Defence</p>
+              <p class="cv-title">Sr. Product Designer</p>
+              <ul class="cv-bullets">
+              <li>Led UX redesign of core cybersecurity platform through research and data insights</li>
+              <li>Aligned engineering, marketing, and sales around customer-centric goals</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">UX Research</span>
+              <span class="tag">Platform Design</span>
+              <span class="tag">Product Strategy</span>
+              <span class="tag">Product Marketing</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Nov 2017 — Nov 2018</div>
-        <div>
-          <p class="cv-company">Ideo Digital</p>
-          <p class="cv-title">Head of Design</p>
-          <ul class="cv-bullets">
-            <li>Managed and mentored a hybrid team of 3 designers</li>
-            <li>Delivered responsive web products for government and tech clients</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Nov 2017 – Nov 2018</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Ideo Digital</p>
+              <p class="cv-title">Head of Design</p>
+              <ul class="cv-bullets">
+              <li>Managed and mentored a hybrid team of 3 designers</li>
+              <li>Delivered responsive web products for government and tech clients</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">Team Management</span>
+              <span class="tag">Product Design</span>
+              <span class="tag">Responsive Web</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Jan 2016 — Aug 2017</div>
-        <div>
-          <p class="cv-company">Wizecare</p>
-          <p class="cv-title">Lead Product Designer &amp; Product Manager</p>
-          <ul class="cv-bullets">
-            <li>Directed product design across a multi-platform digital health ecosystem</li>
-            <li>Delivered MVP to market in collaboration with CEO and stakeholders</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Jan 2016 – Aug 2017</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Wizecare</p>
+              <p class="cv-title">Lead Product Designer &amp; Product Manager</p>
+              <ul class="cv-bullets">
+              <li>Directed product design across a multi-platform digital health ecosystem</li>
+              <li>Delivered MVP to market in collaboration with CEO and stakeholders</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">Product Management</span>
+              <span class="tag">UX Architecture</span>
+              <span class="tag">Multi-platform Design</span>
+              <span class="tag">Usability Testing</span>
+              <span class="tag">User Research</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Jan 2014 — Nov 2015</div>
-        <div>
-          <p class="cv-company">Netcraft</p>
-          <p class="cv-title">Project Lead, UX/UI Designer</p>
-          <ul class="cv-bullets">
-            <li>Led complex UX/UI projects from concept to onboarding</li>
-            <li>Mentored junior designers, contributed to winning tenders</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Jan 2014 – Nov 2015</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Netcraft</p>
+              <p class="cv-title">Project Lead, UX/UI Designer</p>
+              <ul class="cv-bullets">
+              <li>Led complex UX/UI projects from concept to onboarding</li>
+              <li>Mentored junior designers, contributed to winning tenders</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">UX/UI Design</span>
+              <span class="tag">Project Lead</span>
+              <span class="tag">Mentoring</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Usability Testing</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
 
       <div class="cv-role">
-        <div class="cv-period">Nov 2009 — Dec 2013</div>
-        <div>
-          <p class="cv-company">Studio Pop</p>
-          <p class="cv-title">Founder, Product Design &amp; UX Consultant</p>
-          <ul class="cv-bullets">
-            <li>Founded design consultancy delivering UX strategy and end-to-end product design</li>
-          </ul>
+        <div class="cv-card-wrap">
+          <span class="cv-period">Nov 2009 – Dec 2013</span>
+          <div class="cv-card">
+            <div class="cv-card-front">
+              <p class="cv-company">Studio Pop</p>
+              <p class="cv-title">Founder, Product Design &amp; UX Consultant</p>
+              <ul class="cv-bullets">
+              <li>Founded design consultancy delivering UX strategy and end-to-end product design</li>
+              </ul>
+            </div>
+            <div class="cv-card-back">
+                            <p class="cv-back-label">Key Skills</p>
+              <div class="cv-back-skills">
+              <span class="tag">UX Strategy</span>
+              <span class="tag">Product Design</span>
+              <span class="tag">Consulting</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <span class="cv-node"></span>
       </div>
+
+      </div><!-- /.cv-timeline -->
 
       <!-- Education -->
       <div style="margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border);">

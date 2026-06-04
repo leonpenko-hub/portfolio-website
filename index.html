@@ -64,7 +64,7 @@
     }
 
     .case-card-desc {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       line-height: 1.5;
     }
@@ -138,6 +138,13 @@
       <div class="hero-photo" aria-hidden="true">
         <canvas id="sky-canvas"></canvas>
         <div class="hero-sun" id="hero-sun"></div>
+        <div class="click-hint" id="click-hint">
+          <p class="hint-psst">Psst…</p>
+          <p class="hint-sub" id="hint-subject"></p>
+          <svg class="hint-arrow" viewBox="0 0 55 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="hint-arrow-path" d="M53,30 C42,18 18,0 0,2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div class="hero-leaves-wrap">
           <canvas id="wind-canvas"></canvas>
           <img class="leaves-themed leaves-black" src="images/leafs_white.svg" alt="">
@@ -268,9 +275,9 @@
         const hero = document.querySelector('.hero');
         const heroH = hero ? hero.offsetHeight : 600;
         const p = Math.min(1, window.scrollY / heroH);
-        sun.style.transform = 'translateY(' + (p * 80) + 'px)';
+        sun.style.transform = 'translateY(' + (p * 320) + 'px)';
         if (document.body.classList.contains('light')) {
-          sun.style.opacity = Math.max(0, 1 - p * 1.2);
+          sun.style.opacity = Math.max(0, 1 - p * 2);
         } else {
           sun.style.removeProperty('opacity');
         }
@@ -317,8 +324,8 @@
 
       window.addEventListener('scroll', function () {
         const p = Math.min(1, window.scrollY / (document.querySelector('.hero')?.offsetHeight||600));
-        scrollDrop = p * 80;
-        scrollMoonAlpha = Math.max(0, 1 - p * 1.2);
+        scrollDrop = p * 320;
+        scrollMoonAlpha = Math.max(0, 1 - p * 2);
       }, { passive: true });
 
       function drawSky() {
@@ -385,7 +392,7 @@
       const EDGE_FADE = 40; // px from edge to start fading
 
       function resize() { cc.width = cc.offsetWidth||480; cc.height = cc.offsetHeight||480; }
-      function sp()    { return { x: cc.width - 41, y: 35 + scrollDrop }; }
+      function sp()    { return { x: cc.width - 41, y: 35 + scrollDrop + (window._sunAnimY || 0) }; }
       function light() { return document.body.classList.contains('light'); }
       function v(n)    { return getComputedStyle(document.body).getPropertyValue(n).trim(); }
       function hexA(hex, a) {
@@ -396,7 +403,7 @@
 
       window.addEventListener('scroll', function () {
         const p = Math.min(1, window.scrollY / (document.querySelector('.hero')?.offsetHeight||600));
-        scrollDrop = p * 80;
+        scrollDrop = p * 320;
       }, { passive: true });
 
       function drawRays(s) {
@@ -557,6 +564,24 @@
       document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 10);
     });
 
+    // ── Click hint ──
+    function showHint(text) {
+      var hint    = document.getElementById('click-hint');
+      var subject = document.getElementById('hint-subject');
+      if (!hint || !subject) return;
+      subject.textContent = text;
+      hint.classList.add('hint-visible');
+      setTimeout(function () { hint.classList.remove('hint-visible'); }, 5000);
+    }
+
+    // First visit — light mode
+    (function () {
+      if (sessionStorage.getItem('click-hint-shown')) return;
+      sessionStorage.setItem('click-hint-shown', '1');
+      if (!document.body.classList.contains('light')) return;
+      setTimeout(function () { showHint('The sun is clickable'); }, 500);
+    })();
+
     // ── Sun/Moon click → animated theme transition ──
     (function () {
       var busy = false;
@@ -583,6 +608,10 @@
         else      document.body.classList.add('light');
         try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e){}
         setTimeout(function() { document.body.classList.remove('theme-transitioning'); }, 1400);
+        if (dark && !sessionStorage.getItem('click-hint-dark-shown')) {
+          sessionStorage.setItem('click-hint-dark-shown', '1');
+          setTimeout(function () { showHint('The moon is clickable'); }, 800);
+        }
       }
 
       // Day → Night: sun sinks, moon rises
@@ -592,6 +621,7 @@
         if (sun) { sun.classList.add('sun-animating'); sun.style.transition = 'none'; }
 
         animVal(0, 380, 700, function(y) {
+          window._sunAnimY = y;
           if (sun) {
             sun.style.transform = 'translateY(' + y + 'px)';
             sun.style.opacity   = Math.max(0, 1 - y/280).toString();
@@ -605,6 +635,7 @@
         }, 350);
 
         setTimeout(function() {
+          window._sunAnimY = 0;
           if (sun) {
             sun.style.cssText = '';
             sun.classList.remove('sun-animating');
@@ -635,11 +666,14 @@
           if (sun) {
             sun.classList.add('sun-animating');
             sun.style.cssText = 'transition:none;transform:translateY(380px);opacity:0';
+            window._sunAnimY = 380;
             setTimeout(function() {
               animVal(380, 0, 650, function(y) {
+                window._sunAnimY = y;
                 sun.style.transform = 'translateY(' + y + 'px)';
                 sun.style.opacity   = Math.min(1, (380-y)/280).toString();
               }, function() {
+                window._sunAnimY = 0;
                 sun.style.cssText = '';
                 sun.classList.remove('sun-animating');
               });
