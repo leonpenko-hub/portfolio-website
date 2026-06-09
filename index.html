@@ -228,9 +228,7 @@
           </a>
         </div>
 
-        <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact">
-          <p style="display:none"><input name="bot-field"></p>
+        <form class="contact-form" id="contact-form">
           <div class="form-field">
             <label class="form-label" for="name">Name</label>
             <input class="form-input" id="name" name="name" type="text" placeholder="Your name" required>
@@ -713,10 +711,10 @@
 
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      fetch('/', {
+      fetch('https://formspree.io/f/mbdeyzlp', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(this)).toString()
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(this)
       }).then(() => {
         document.getElementById('contact-form').style.display = 'none';
         document.getElementById('contact-success').style.display = 'block';
