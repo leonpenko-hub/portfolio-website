@@ -281,21 +281,25 @@
 
   // ── Callback request (call me) ─────────────────
   function sendCallbackRequest() {
-    var details = 'Callback request\n';
-    if (ctx.phone)     details += 'Phone: '   + ctx.phone     + '\n';
-    if (ctx.inquiry)   details += 'Inquiry: ' + ctx.inquiry   + '\n';
-    if (ctx.extra_msg) details += 'Note: '    + ctx.extra_msg + '\n';
-    var subject = encodeURIComponent('Someone left a message in your portfolio');
-    var body    = encodeURIComponent(details);
+    var data = new FormData();
+    data.append('_subject', 'Callback request from portfolio chat');
+    data.append('type', 'Callback request');
+    if (ctx.phone)     data.append('phone',   ctx.phone);
+    if (ctx.inquiry)   data.append('inquiry', ctx.inquiry);
+    if (ctx.extra_msg) data.append('note',    ctx.extra_msg);
+
+    fetch('https://formspree.io/f/mbdeyzlp', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+
     var foot = document.getElementById('chat-foot');
     var btn = document.createElement('button');
     btn.className = 'chat-form-cal';
     btn.textContent = 'Schedule a call in the meantime ↗';
     btn.addEventListener('click', function () { window.open(CALENDAR_URL, '_blank'); });
     foot.appendChild(btn);
-    setTimeout(function () {
-      window.location.href = 'mailto:leon.penko@gmail.com?subject=' + subject + '&body=' + body;
-    }, 1000);
   }
 
   // ── Contact form ───────────────────────────────
@@ -319,14 +323,20 @@
       var msg   = document.getElementById('cf-msg').value.trim();
       if (!email) { document.getElementById('cf-email').focus(); return; }
 
-      var details = 'From: ' + (name || 'Unknown') + '\nEmail: ' + email;
-      if (phone)            details += '\nPhone: ' + phone;
-      if (ctx.inquiry)      details += '\n\nInquiry: ' + ctx.inquiry;
-      if (ctx.intent)       details += '\nIntent: '  + ctx.intent;
-      if (msg)              details += '\n\nMessage: ' + msg;
+      var data = new FormData();
+      data.append('_subject', 'New message from portfolio chat');
+      data.append('name',    name || 'Unknown');
+      data.append('email',   email);
+      if (phone)        data.append('phone',   phone);
+      if (ctx.inquiry)  data.append('inquiry', ctx.inquiry);
+      if (ctx.intent)   data.append('intent',  ctx.intent);
+      if (msg)          data.append('message', msg);
 
-      var subject = encodeURIComponent('Someone left a message in your portfolio');
-      var body    = encodeURIComponent(details);
+      fetch('https://formspree.io/f/mbdeyzlp', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
 
       clearFoot();
       userMsg(email);
@@ -341,9 +351,6 @@
           foot.appendChild(btn);
         }, 900);
       });
-      setTimeout(function () {
-        window.location.href = 'mailto:leon.penko@gmail.com?subject=' + subject + '&body=' + body;
-      }, 1000);
     });
 
     document.getElementById('cf-cal').addEventListener('click', function () {
