@@ -1229,6 +1229,78 @@ body.light .svg-adaptive-text {
   }
 }
 
+/* ── Hamburger button ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu panel ── */
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 8px 24px 20px;
+}
+
+.nav-mobile-menu.open { display: flex; }
+
+.nav-mobile-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-mobile-links li a {
+  display: block;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-mobile-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 0;
+}
+
+.nav-mobile-toggle-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .nav-logo-img { height: 37px; }
+  .nav-right { display: none; }
+  .nav-hamburger { display: flex; }
+  .pan-btn { width: 36px; height: 36px; font-size: 18px; }
+}
+
 @media (max-width: 560px) {
   .ux-cards-row {
     grid-template-columns: repeat(2, 1fr);
@@ -1553,7 +1625,11 @@ body.light .csm-graph path[fill="#91E3FC"] { fill: #1E6091; }
 
 
 @media (max-width: 720px) {
-  .cs-split-layout { grid-template-columns: 1fr; }
+  .cs-split-layout { grid-template-columns: 1fr; direction: ltr; }
+  .cs-split-layout--reverse { direction: ltr; }
+  .cs-split-text { order: 1; }
+  .cs-split-img-wrap,
+  .pan-wrap { order: 2; }
 }
 
 .csm-graph-wrap {
@@ -1660,7 +1736,14 @@ body:not(.light) .csm-graph-img {
 
 
 @media (max-width: 720px) {
-  .cs-intro-layout { grid-template-columns: 1fr; margin-right: 0; }
+  .cs-intro-layout { grid-template-columns: 1fr; margin-right: 0; margin-bottom: 48px; }
+  .cs-intro-img-wrap { justify-content: center; }
+  .cs-intro-img {
+    transform: none;
+    max-width: 100%;
+    height: auto;
+    object-position: center;
+  }
 }
 
 /* ── Case Study Next/Prev ── */
