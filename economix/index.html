@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economix - Leon Penkovich</title>
+  <meta name="description" content="Decentralized crypto rating and forecasting platform. UX architecture and design management case study by Leon Penkovich.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
+  <style>body { background: var(--bg); }</style>
+  <style>
+    .browser-frame { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.08); background: #fff; margin: 20px 0; }
+    .browser-frame-bar { height: 38px; background: #ececec; display: flex; align-items: center; gap: 6px; padding: 0 14px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .browser-frame-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-frame-dot:nth-child(1) { background: #ff5f57; }
+    .browser-frame-dot:nth-child(2) { background: #febc2e; }
+    .browser-frame-dot:nth-child(3) { background: #28c840; }
+    .browser-frame-url { margin-left: 12px; font-size: 12px; color: #888; background: #fff; border-radius: 6px; padding: 3px 10px; font-family: monospace; }
+    /* Per Leon: only the Discovery homepage (very long page) scrolls —
+       every other screenshot here just shows the full page, no crop, no scroll. */
+    .browser-frame-scroll { overflow: visible; }
+    .browser-frame-scroll img { width: 100%; display: block; }
+
+    /* Discovery-only: fixed-height scroll box (drag-to-pan would fight the
+       scroll, so zoom/pan lives only in the expand overlay, not inline).
+       10% wider than the normal content column. */
+    /* left edge stays aligned with every other image on the page — only
+       extends rightward, and only above 720px where there's room for it. */
+    .browser-frame--discovery { position: relative; }
+    @media (min-width: 721px) { .browser-frame--discovery { width: 110%; } }
+    /* height scales WITH the box's own width (aspect-ratio), instead of a
+       fixed px — so shrinking the frame shrinks height proportionally too,
+       the same way the rest of the layout scales, not width-only. */
+    .browser-frame-scroll--discovery-desktop { aspect-ratio: 16 / 9; height: auto; max-height: none; overflow-y: auto; overflow-x: hidden; }
+    .browser-frame-scroll--discovery-mobile { aspect-ratio: 320 / 620; height: auto; max-height: none; overflow-y: auto; overflow-x: hidden; }
+    .pan-trigger { cursor: zoom-in; }
+    .browser-frame-hint { margin-left: auto; font-size: 11px; color: #999; font-family: sans-serif; white-space: nowrap; }
+
+    .wizard-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .wizard-row .cs-img { flex: 1 1 300px; margin: 0; }
+
+    /* Straight (no rotation) diagonal cascade. Everything here — card size,
+       card position, AND the container's own height — is expressed as a
+       fraction of the column width (via aspect-ratio), so the section's
+       height always matches exactly what the images need instead of a
+       guessed fixed px that leaves a gap (or overflows) at other widths. */
+    .wizard-stack { position: relative; aspect-ratio: 2.62 / 1; height: auto; margin: 24px 0 32px; }
+    .wizard-stack .cs-img {
+      position: absolute; width: 42%; aspect-ratio: 1280 / 870; object-fit: cover; object-position: top center;
+      margin: 0; box-shadow: 0 14px 30px rgba(0,0,0,0.18); transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wizard-stack .cs-img:nth-child(1) { top: 0;     left: 0%;  z-index: 1; }
+    .wizard-stack .cs-img:nth-child(2) { top: 12.5%; left: 29%; z-index: 2; }
+    .wizard-stack .cs-img:nth-child(3) { top: 25%;   left: 58%; z-index: 3; }
+    .wizard-stack .cs-img:hover { transform: scale(1.06); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.28); }
+
+    /* Mobile-screenshot toggle, at normal viewport width: centered,
+       simply side by side — not touching, not overlapping. Flex height
+       already follows its content naturally, no fixed value needed. */
+    .wizard-stack--mobile { display: flex; justify-content: center; align-items: flex-start; gap: 10px; height: auto; aspect-ratio: auto; position: static; margin: 24px 0 32px; }
+    .wizard-stack--mobile .cs-img { position: static; width: 22%; aspect-ratio: 320 / 600; object-fit: contain; margin: 0; }
+
+    /* Narrow viewport (real responsive breakpoint, either toggle state):
+       switch to an overlapping diagonal stack, stepping further down than
+       the desktop version — still all proportional, so it self-sizes too. */
+    /* Same diagonal-stack treatment, recalculated for the Rating popup
+       screens' own aspect ratio (1920×1140, not the wizard's 1280×870). */
+    /* Always side by side, never stacked — flex-basis:0 + no wrap means
+       they share the row and shrink together instead of breaking to a new
+       line the way .wizard-row's fixed 300px basis was doing. */
+    /* The real site's .cs-h2 (300) and .step-title (400) are two different
+       weights by design - Leon wants one weight throughout this page, matching
+       "My Role" (.cs-h2, 300). Scoped to this file only, not the shared
+       stylesheet, so Wizecare/Totango are untouched. */
+    .step-title { font-weight: 300; }
+
+    .compare-row { display: flex; gap: 16px; flex-wrap: nowrap; margin-top: 16px; }
+    .compare-row .cs-img { flex: 1 1 0; min-width: 0; margin: 0; }
+    /* Side by side stays legible on desktop; on an actual mobile-width
+       screen the same two images would shrink too small to read, so they
+       stack instead. */
+    @media (max-width: 720px) {
+      .compare-row { flex-direction: column; }
+    }
+
+    .rating-stack { position: relative; aspect-ratio: 2.9 / 1; height: auto; margin: 24px 0 32px; }
+    .rating-stack .cs-img {
+      position: absolute; width: 42%; aspect-ratio: 1920 / 1140; object-fit: cover; object-position: top center;
+      margin: 0; box-shadow: 0 14px 30px rgba(0,0,0,0.18); transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .rating-stack .cs-img:nth-child(1) { top: 0;      left: 0%;  z-index: 1; }
+    .rating-stack .cs-img:nth-child(2) { top: 13.85%; left: 29%; z-index: 2; }
+    .rating-stack .cs-img:nth-child(3) { top: 27.7%;  left: 58%; z-index: 3; }
+    .rating-stack .cs-img:hover { transform: scale(1.06); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.28); }
+    @media (max-width: 720px) {
+      .rating-stack { aspect-ratio: 2.1 / 1; }
+      .rating-stack .cs-img { width: 58%; }
+      .rating-stack .cs-img:nth-child(2) { left: 21%; }
+      .rating-stack .cs-img:nth-child(3) { left: 42%; }
+    }
+
+    @media (max-width: 720px) {
+      .wizard-stack { aspect-ratio: 1.9 / 1; }
+      .wizard-stack .cs-img { width: 58%; }
+      .wizard-stack .cs-img:nth-child(2) { left: 21%; top: 12.5%; }
+      .wizard-stack .cs-img:nth-child(3) { left: 42%; top: 25%; }
+
+      /* Portrait cards have a very different height-to-width relationship
+         than the landscape ones above — the 12.5%/25% top offsets from the
+         desktop cases don't carry over (that's what was pushing card 3 past
+         the bottom line). Recomputed for this card's own aspect ratio. */
+      .wizard-stack--mobile { display: block; position: relative; aspect-ratio: 0.9 / 1; }
+      .wizard-stack--mobile .cs-img { position: absolute; width: 55%; margin: 0; }
+      .wizard-stack--mobile .cs-img:nth-child(1) { top: 0;     left: 0%;  z-index: 1; }
+      .wizard-stack--mobile .cs-img:nth-child(2) { top: 5.7%;  left: 20%; z-index: 2; }
+      .wizard-stack--mobile .cs-img:nth-child(3) { top: 11.3%; left: 40%; z-index: 3; }
+    }
+
+    .responsive-note { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #555; background: #f4f4f4; border-radius: 20px; padding: 4px 12px; margin-top: 10px; }
+
+    /* Desktop / Mobile view toggle for a screenshot — reuses the same
+       filled-pill language as the diagram's numbered badges. */
+    .device-toggle { display: flex; width: fit-content; border: 1px solid var(--border); border-radius: 999px; padding: 3px; gap: 3px; margin: 22px auto 16px; }
+    .device-btn { border: none; background: none; cursor: pointer; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-family: inherit; color: var(--muted); }
+    .device-btn.active { background: var(--fg); color: var(--bg); }
+    .device-view { display: none; }
+    .device-view.active { display: block; }
+    .device-view--mobile .browser-frame { max-width: 320px; margin-left: auto; margin-right: auto; }
+
+    figure.diagram-figure { margin: 0 0 28px; padding-top: 64px; }
+    figure.diagram-figure svg { max-width: 100%; height: auto; display: block; }
+    figure.diagram-figure figcaption { font-size: 13px; color: var(--muted); margin-top: 14px; font-family: inherit; }
+
+    /* Data model flow — reuses the site's own type tokens only (.ux-card-title
+       20px, .ux-card-desc 13px, .tag/.ux-card-num 11px) — no new font sizes. */
+    .flow-connectors-wrap { position: relative; }
+    .flow-connectors-wrap svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .flow-loop-row { position: relative; height: 60px; margin-bottom: 14px; }
+    .flow-loop-label { font-size: 13px; fill: var(--fg); font-family: inherit; }
+    .flow-num-row { display: flex; gap: 44px; margin-bottom: 10px; }
+    .flow-num-col { flex: 1; display: flex; justify-content: flex-start; }
+    .flow-num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 30px; height: 22px; padding: 0 9px; border-radius: 999px;
+      background: var(--fg); color: var(--bg);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+    }
+    .flow-body-row { display: flex; gap: 44px; }
+    .flow-body-col { flex: 1; }
+    .flow-body-col .ux-card-title { font-family: inherit; font-weight: 500; }
+    @media (max-width: 720px) {
+      .flow-body-row { flex-direction: column; gap: 28px; }
+      .flow-num-row { display: none; }
+      .flow-loop-row { display: none; }
+    }
+
+    /* .cs-intro-img in style.css is hard-tuned for the Totango mug photo
+       (translateX(-100px) scale(1.69)) — that's why our wider card+wallet
+       shot rides up over the text. Same docked-right logic, scaled down 20%. */
+    .cs-intro-img--economix { transform: translateX(-80px) scale(1.352); }
+
+    /* style.css only sets min-height on .problem-pair-img-wrap, so with
+       height:100% on the <img> the row height ends up driven by each
+       photo's own aspect ratio — that's why our two problem images were
+       rendering at different heights than Totango's. Pin it so both
+       Economix problem cards match each other exactly. */
+    .problem-pair-img-wrap { height: 240px; min-height: 240px; }
+    .problem-pair-img--zoom20 { transform: scale(1.2); transform-origin: center; }
+    /* base object-position is "center top", which crops off the actual
+       hand/domino contact point lower in the frame — recenter, no scale
+       (object-fit:cover already fills the box, so this can't reveal edges) */
+    .problem-pair-img--domino { object-position: 50% 55%; }
+    /* .cs-img adds a 1px gray border — redundant on top of this collage's own drop shadows */
+    .cs-img--noborder { border: none; }
+
+    /* Same card styling as .ux-card (Wizecare's Insights Mapping), just a
+       3-up row instead of 5 — reusing the site's existing card language. */
+    .findings-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    @media (max-width: 640px) { .findings-row { grid-template-columns: 1fr; } }
+
+    .quote-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; align-items: stretch; }
+    /* grid stretches each box to the row's tallest quote; flex-column + margin-top:auto
+       on the attribution line keeps all three "Author, Year" lines aligned on one baseline
+       at the bottom, regardless of how long each quote itself runs. */
+    .quote-row .quote-block { margin: 0; display: flex; flex-direction: column; }
+    .quote-row .quote-attr { margin-top: auto; padding-top: 10px; }
+    .quote-row .quote-attr a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    @media (max-width: 900px) { .quote-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .quote-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="light">
+
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/"><img class="nav-logo-img" src="../images/lp_logo.svg" alt="Leon Penkovich"></a>
+      <div class="nav-right">
+        <button class="nav-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+          <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="nav-toggle-track"><span class="nav-toggle-thumb"></span></span>
+          <span class="nav-toggle-icon moon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/#work">Work</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <ul class="nav-mobile-links">
+        <li><a href="/#work">Work</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <div class="nav-mobile-toggle-row">
+        <span class="nav-mobile-toggle-label">Appearance</span>
+        <button class="nav-toggle" id="theme-toggle-mobile" aria-label="Toggle dark/light mode">
+          <span class="nav-toggle-icon sun"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="nav-toggle-track"><span class="nav-toggle-thumb"></span></span>
+          <span class="nav-toggle-icon moon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+    <div class="wrap">
+    <a class="cs-back" href="/">← All work</a>
+
+    <header class="cs-hero">
+      <p class="cs-index">Economix</p>
+      <h1 class="cs-title">Economix - Crowdsourced Rating<br>&amp; Forecasting Ecosystem</h1>
+      <p class="cs-subtitle">
+        Designing a full crypto-and-beyond investment ecosystem from the ground up - a public discovery site, tiered identity verification, and a platform where every rating and forecast is backed by real reputation.
+      </p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><p class="cs-meta-label">My Role</p><p class="cs-meta-value">UX Architect · Design Manager</p></div>
+        <div class="cs-meta-item"><p class="cs-meta-label">Industry</p><p class="cs-meta-value">Fintech · Crypto, Stocks &amp; ICOs</p></div>
+        <div class="cs-meta-item"><p class="cs-meta-label">Scope</p><p class="cs-meta-value">74+ Screens · Web + Responsive · 0-to-1 IA</p></div>
+      </div>
+    </header>
+
+    <div class="cs-body">
+
+      <!-- 01 Background -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">01</span>
+          <span class="cs-section-title">Background</span>
+        </div>
+
+        <div class="cs-intro-layout">
+          <div>
+            <h2 class="cs-h2">What is Economix?</h2>
+            <p class="cs-p">
+              Economix is a decentralized platform that rates and forecasts crypto assets, stocks, ICOs, IPOs and startups through the collective judgment of its own users - professional raters, forecasters, and portfolio builders - instead of a handful of paid analysts. The core belief: no single expert's opinion is fully objective, but the average of many independent, incentivized opinions gets remarkably close.
+            </p>
+          </div>
+          <div class="cs-intro-img-wrap">
+            <img src="../images/economix_card-wallet.png" alt="Economix branded debit card and hardware wallet device" class="cs-intro-img">
+          </div>
+        </div>
+
+        <hr class="cs-divider">
+        <h2 class="cs-h2">My Role</h2>
+        <p class="cs-p">
+          I led product design and UX architecture end to end as an independent designer over a six-month engagement - specifying the platform's information architecture, designing every screen across four surfaces (the public rating site, the trading site, onboarding, and the trading platform itself), and managing a team of two designers. I also partnered closely on product strategy and roadmap decisions.
+        </p>
+      </section>
+
+      <!-- 02 Problem -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">02</span>
+          <span class="cs-section-title">Problem Statements</span>
+        </div>
+        <h2 class="cs-h2">Two compounding problems</h2>
+
+        <div class="problem-pairs-grid">
+
+          <div class="problem-pair">
+            <div class="problem-card-top">
+              <p class="problem-num">Problem statement 01</p>
+              <p class="problem-title">No Reliable Signal</p>
+              <p class="problem-body">
+                Evaluating an ICO or crypto asset meant trusting a handful of paid analysts or scattered social sentiment - there was no transparent, collective, accountable rating standard investors could actually check.
+              </p>
+            </div>
+            <ul class="problem-facts">
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">article</span>
+                <div><p class="problem-fact-label">What is the problem?</p><p class="problem-fact-value">Fragmented, low-trust asset evaluation</p></div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">person_pin</span>
+                <div><p class="problem-fact-label">Who is effected?</p><p class="problem-fact-value">Retail investors, independent analysts, new entrants</p></div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">hub</span>
+                <div><p class="problem-fact-label">Why it's a problem:</p><p class="problem-fact-value">High risk, missed opportunities on quality assets, no way to hold raters accountable</p></div>
+              </li>
+            </ul>
+            <div class="problem-pair-img-wrap">
+              <img src="../images/economix_problem1-signal.jpg" alt="Grid of physical crypto coins - Bitcoin, Litecoin, Ripple, Ethereum" class="problem-pair-img problem-pair-img--evidence problem-pair-img--zoom20">
+            </div>
+          </div>
+
+          <div class="problem-pair">
+            <div class="problem-card-top">
+              <p class="problem-num">Problem statement 02</p>
+              <p class="problem-title">Compliance vs. Conversion</p>
+              <p class="problem-body">
+                How much a user can invest depends on how much of their identity they've verified - but KYC is exactly where users abandon signup. This tension between compliance and conversion isn't unique to Economix - it's a challenge every fintech product runs into - but the wizard still had to satisfy regulatory requirements without losing the casual investor at step one.
+              </p>
+            </div>
+            <ul class="problem-facts">
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">article</span>
+                <div><p class="problem-fact-label">What is the problem?</p><p class="problem-fact-value">Regulatory verification creates drop-off risk</p></div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">person_pin</span>
+                <div><p class="problem-fact-label">Who is effected?</p><p class="problem-fact-value">New users, compliance, growth</p></div>
+              </li>
+              <li class="problem-fact">
+                <span class="material-symbols-outlined problem-fact-icon">hub</span>
+                <div><p class="problem-fact-label">Why it's a problem:</p><p class="problem-fact-value">Losing users at onboarding undermines the crowd the rating model depends on</p></div>
+              </li>
+            </ul>
+            <div class="problem-pair-img-wrap">
+              <img src="../images/economix_problem2-compliance.webp" alt="A businessman's hand stopping a chain of falling wooden dominoes" class="problem-pair-img problem-pair-img--person problem-pair-img--domino">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 03 Research & Data Architecture -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">03</span>
+          <span class="cs-section-title">Research</span>
+        </div>
+
+        <div class="research-phase">
+          <p class="research-phase-label">Competitive Benchmarking</p>
+          <h2 class="cs-h2">Feeling the Industry</h2>
+          <p class="cs-p">
+            I went through the live apps of the closest existing players - Estimize, Augur, CIndicator - not their marketing pages, to see how they actually handled forecasting, rating and portfolio UX before designing our own.
+          </p>
+          <img src="../images/economix_competitor-ref.png" alt="Reference screens from Estimize, Augur and CIndicator" class="cs-img cs-img--noborder">
+
+          <div class="findings-row">
+            <div class="ux-card">
+              <div class="ux-card-body">
+                <p class="ux-card-num">Finding 01</p>
+                <strong class="ux-card-title">Reputation Next to Data</strong>
+                <p class="ux-card-desc">Followers and track record shown right next to the estimate - not buried in a separate profile.</p>
+              </div>
+            </div>
+            <div class="ux-card">
+              <div class="ux-card-body">
+                <p class="ux-card-num">Finding 02</p>
+                <strong class="ux-card-title">Sliders Are Too Blunt</strong>
+                <p class="ux-card-desc">Fast to grasp, but too binary for a multi-criteria project rating.</p>
+              </div>
+            </div>
+            <div class="ux-card">
+              <div class="ux-card-body">
+                <p class="ux-card-num">Finding 03</p>
+                <strong class="ux-card-title">Portfolio-First Home</strong>
+                <p class="ux-card-desc">Allocation, live assets, performance - makes a forecasting tool feel like somewhere you'd actually return to.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="cs-divider">
+        <div class="research-phase">
+          <p class="research-phase-label">Motivation Research</p>
+          <h2 class="cs-h2">Why People Actually Take Action</h2>
+          <p class="cs-p">
+            Knowing how rating apps work wasn't enough - I needed to know what actually gets someone to rate, forecast, or invest in the first place. Behavioral finance research on crypto markets points to one answer: it's rarely analysis. It's the live price board itself.
+          </p>
+
+          <div class="quote-row">
+            <div class="quote-block">
+              <p class="quote-text">"...it is mainly individual investors who make decisions under the influence of emotions, not guided by rational analysis."</p>
+              <p class="quote-attr"><a href="https://ersj.eu/journal/4019/download/The+Fear+of+Missing+Out+FOMO+Effect+in+Cryptocurrency+Trading+Analyses+of+Mass+Behavior+and+Its+Consequences+in+the+Era+of+Unpredictable+Extreme+Phenomena.pdf" target="_blank" rel="noopener">Klepacki, J. (2025) - European Research Studies Journal</a></p>
+            </div>
+            <div class="quote-block">
+              <p class="quote-text">"Cryptocurrencies' prices are driven by herding... prices 'as-is' are the coordination mechanism."</p>
+              <p class="quote-attr"><a href="https://arxiv.org/pdf/1806.11348" target="_blank" rel="noopener">Poyser Calderón, O. (2018) - Universitat Autònoma de Barcelona</a></p>
+            </div>
+            <div class="quote-block">
+              <p class="quote-text">"84% of investors make their investment decisions based on the fear of missing out (FOMO)." (n=1,248 crypto holders)</p>
+              <p class="quote-attr"><a href="https://thedefiant.io/news/cefi/kraken-survey-84-crypto-investors-driven-fomo-60-concerned-profits-0dd83e37" target="_blank" rel="noopener">Kraken Crypto FOMO Survey, 2024 - via The Defiant</a></p>
+            </div>
+          </div>
+
+          <p class="cs-p" style="margin-top: 20px;">
+            <strong>What this proves: people don't act because they analyzed - they act because they saw the price move, and saw everyone else moving with it. The live number is the trigger, not a rational read of the fundamentals.</strong>
+          </p>
+
+          <img src="../images/economix_cmc-ref.png" alt="CoinMarketCap live price ranking table" class="cs-img cs-img--noborder" style="margin-top: 24px;">
+          <p class="cs-p">
+            My clearest real-world reference for this was CoinMarketCap itself - a live, public ranking table is the trigger, not a landing page pitch.
+          </p>
+
+          <p class="cs-p" style="margin-top: 16px;">
+            <!-- LEON: replace with your own conclusion -->
+            This is why the discovery homepage leads with a live, public ranking table instead of a marketing pitch - the price movement itself is what gets someone to act, so the product has to earn that moment before it ever asks for a signup.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- 04 Execution -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">04</span>
+          <span class="cs-section-title">Execution</span>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 01</p>
+          <h3 class="step-title">Structuring the Data Model</h3>
+          <p class="step-body">
+            With three different user actions feeding one reward economy, the real design problem wasn't the screens - it was the data model underneath them: what an action targets, what it produces, and how that loops back into who gets followed. I mapped this out before designing a single screen, and it drove every decision that came after it.
+          </p>
+
+          <figure class="diagram-figure">
+
+            <div class="flow-connectors-wrap" id="connectorsWrap">
+              <div class="flow-loop-row"></div>
+
+              <div class="flow-num-row" id="numRow">
+                <div class="flow-num-col"><span class="flow-num-badge" id="badge1">01</span></div>
+                <div class="flow-num-col"><span class="flow-num-badge" id="badge2">02</span></div>
+                <div class="flow-num-col"><span class="flow-num-badge" id="badge3">03</span></div>
+                <div class="flow-num-col"><span class="flow-num-badge" id="badge4">04</span></div>
+                <div class="flow-num-col"><span class="flow-num-badge" id="badge5">05</span></div>
+              </div>
+
+              <svg id="connSvg">
+                <defs>
+                  <marker id="connArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 z" fill="var(--fg)"/>
+                  </marker>
+                </defs>
+                <g id="connLines"></g>
+                <path id="loopPath" fill="none" stroke="var(--fg)" stroke-width="1" marker-end="url(#connArrow)"/>
+                <text id="loopLabel" text-anchor="middle" class="flow-loop-label">New followers copy your next move</text>
+              </svg>
+            </div>
+            <script>
+              (function () {
+                var GAP = 0.92; // stop 8% short of the badge being pointed at
+                function draw() {
+                  var wrap = document.getElementById('connectorsWrap');
+                  var svg = document.getElementById('connSvg');
+                  var linesG = document.getElementById('connLines');
+                  var loopPath = document.getElementById('loopPath');
+                  var loopLabel = document.getElementById('loopLabel');
+                  if (!wrap || !svg) return;
+                  var wrapRect = wrap.getBoundingClientRect();
+                  var badges = [1, 2, 3, 4, 5].map(function (n) {
+                    var el = document.getElementById('badge' + n);
+                    var r = el.getBoundingClientRect();
+                    return {
+                      left: r.left - wrapRect.left,
+                      right: r.right - wrapRect.left,
+                      top: r.top - wrapRect.top,
+                      cy: r.top - wrapRect.top + r.height / 2
+                    };
+                  });
+
+                  // straight connectors: touch the source badge, stop short of the next
+                  linesG.innerHTML = '';
+                  for (var i = 0; i < badges.length - 1; i++) {
+                    var startX = badges[i].right;
+                    var endXFull = badges[i + 1].left;
+                    var endX = startX + (endXFull - startX) * GAP;
+                    var y = badges[i].cy;
+                    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', startX); line.setAttribute('y1', y);
+                    line.setAttribute('x2', endX); line.setAttribute('y2', y);
+                    line.setAttribute('stroke', 'var(--fg)');
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('marker-end', 'url(#connArrow)');
+                    linesG.appendChild(line);
+                  }
+
+                  // loop: touches badge 5's top, stops short of badge 2's top
+                  var x5 = badges[4].left + (badges[4].right - badges[4].left) / 2;
+                  var x2 = badges[1].left + (badges[1].right - badges[1].left) / 2;
+                  var yBottomFull = badges[4].top;
+                  var yTop = 10;
+                  var yBottom = yTop + (yBottomFull - yTop) * GAP;
+                  var r = 8;
+                  var d = 'M ' + x5 + ',' + yBottomFull +
+                          ' L ' + x5 + ',' + (yTop + r) +
+                          ' Q ' + x5 + ',' + yTop + ' ' + (x5 - r) + ',' + yTop +
+                          ' L ' + (x2 + r) + ',' + yTop +
+                          ' Q ' + x2 + ',' + yTop + ' ' + x2 + ',' + (yTop + r) +
+                          ' L ' + x2 + ',' + yBottom;
+                  loopPath.setAttribute('d', d);
+                  loopLabel.setAttribute('x', (x2 + x5) / 2);
+                  loopLabel.setAttribute('y', yTop - 4);
+                }
+                window.addEventListener('load', draw);
+                window.addEventListener('resize', draw);
+                if (document.readyState === 'complete') draw();
+              })();
+            </script>
+
+            <div class="flow-body-row">
+              <div class="flow-body-col">
+                <strong class="ux-card-title">Verify Identity</strong>
+                <p class="ux-card-desc" style="margin-top:8px;">Three tiers - up to $15K, $50K-$1M, or $1M+ - set how much a user can invest.</p>
+              </div>
+              <div class="flow-body-col">
+                <strong class="ux-card-title">Choose an Action</strong>
+                <p class="ux-card-desc" style="margin-top:8px;">Rate or forecast - and build a portfolio either way. Four roles feed this one economy: Rater, Forecaster, Portfolio Builder, and Moderator, who reviews the ratings other users submit.</p>
+              </div>
+              <div class="flow-body-col">
+                <strong class="ux-card-title">Target an Asset</strong>
+                <p class="ux-card-desc" style="margin-top:8px;">Crypto, stock, ICO, IPO, or startup - one asset record.</p>
+              </div>
+              <div class="flow-body-col">
+                <strong class="ux-card-title">Score Accuracy</strong>
+                <p class="ux-card-desc" style="margin-top:8px;">Every rate and forecast measured against the real outcome.</p>
+              </div>
+              <div class="flow-body-col">
+                <strong class="ux-card-title">Earn Reputation</strong>
+                <p class="ux-card-desc" style="margin-top:8px;">Accuracy becomes reward tokens and leaderboard rank.</p>
+              </div>
+            </div>
+          </figure>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 02</p>
+          <h3 class="step-title">Discovery - A Public, CoinMarketCap-Style Homepage</h3>
+          <p class="step-body">Before signing up, anyone can browse live project rankings, prices and scores. The homepage doubles as both marketing and product - it's the trust-building layer that gets people to create an account.</p>
+
+          <div class="device-toggle" data-toggle="discovery">
+            <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+            <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+          </div>
+
+          <div class="device-view device-view--desktop active" data-group="discovery" data-device="desktop">
+            <div class="browser-frame browser-frame--discovery">
+              <div class="browser-frame-bar"><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-url">economix.io</span><span class="browser-frame-hint">↕ Scroll, or click to expand</span></div>
+              <div class="browser-frame-scroll browser-frame-scroll--discovery-desktop"><img class="pan-trigger" src="../images/economix_marketing.png" alt="Economix trading homepage - desktop"></div>
+            </div>
+          </div>
+
+          <div class="device-view device-view--mobile" data-group="discovery" data-device="mobile">
+            <div class="browser-frame browser-frame--discovery">
+              <div class="browser-frame-bar"><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-url">economix.io</span><span class="browser-frame-hint">↕ Scroll, or click to expand</span></div>
+              <div class="browser-frame-scroll browser-frame-scroll--discovery-mobile"><img class="pan-trigger" src="../images/economix_marketing-mobile.png" alt="Economix trading homepage - mobile"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 03</p>
+          <h3 class="step-title">Sign Up &amp; Identity Verification Wizard</h3>
+          <p class="step-body">Creating an account is only step one - how much a user can actually invest depends on how far they go through identity verification (three tiers: up to 15K, up to 50K, up to 1M). I designed the full multi-step wizard, balancing regulatory requirements against drop-off.</p>
+          <div class="device-toggle" data-toggle="wizard">
+            <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+            <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+          </div>
+
+          <div class="device-view active" data-group="wizard" data-device="desktop">
+            <div class="wizard-stack">
+              <img class="cs-img" src="../images/economix_wiz1-desktop.png" alt="Wizard step 1 - desktop">
+              <img class="cs-img" src="../images/economix_wiz2-desktop.png" alt="Wizard step 2 - desktop">
+              <img class="cs-img" src="../images/economix_wiz3-desktop.png" alt="Wizard step 4 - desktop">
+            </div>
+          </div>
+
+          <div class="device-view device-view--mobile" data-group="wizard" data-device="mobile">
+            <div class="wizard-stack wizard-stack--mobile">
+              <img class="cs-img" src="../images/economix_wiz1-mobile.png" alt="Wizard step 1 - mobile">
+              <img class="cs-img" src="../images/economix_wiz2-mobile.png" alt="Wizard step 2 - mobile">
+              <img class="cs-img" src="../images/economix_wiz3-mobile.png" alt="Wizard step 4 - mobile">
+            </div>
+          </div>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 04</p>
+          <h3 class="step-title">Rate &amp; Forecast - Score Quality, Predict Price</h3>
+          <p class="step-body">Every Rate or Forecast starts here - a filterable list of every asset, by category, score, and criteria. This is the jumping-off point for both actions.</p>
+          <img class="cs-img" src="../images/economix_rating-filter.png" alt="Economix rating list with filters">
+
+          <p class="step-body" style="margin-top: 28px;">They aren't the same action - each one is its own flow, targeting a completely different thing.</p>
+
+          <hr class="cs-divider">
+          <h2 class="cs-h2">Rating</h2>
+          <p class="step-body">Scores a project's underlying quality - team, tech, tokenomics - against fixed criteria, one at a time, until every criterion has a number behind it.</p>
+          <div class="compare-row">
+            <img class="cs-img" src="../images/economix_rate1.png" alt="Score a project's criteria 1 to 10 with justification">
+            <img class="cs-img" src="../images/economix_rate2.png" alt="Review all criteria scores and submit the rating">
+          </div>
+
+          <hr class="cs-divider">
+          <h2 class="cs-h2">Forecasting</h2>
+          <p class="step-body">Predicts where the asset's real, tracked price will actually move by a set date - checked later against an outside oracle (CoinMarketCap), not against opinion.</p>
+          <div class="compare-row">
+            <img class="cs-img" src="../images/economix_forecast1.png" alt="Forecast a percentage price change against a CoinMarketCap oracle">
+            <img class="cs-img" src="../images/economix_forecast2.png" alt="Lock tokens and submit the forecast">
+          </div>
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 05</p>
+          <h3 class="step-title">Asset Page - Not Just Crypto</h3>
+          <p class="step-body">Every rated asset - crypto, stocks, ICOs, IPOs, or startups - gets its own page with a live price chart, community rating, and a feed of what raters are actually saying.</p>
+          <img class="cs-img" src="../images/economix_asset.png" alt="Economix asset page - Ethereum">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 06</p>
+          <h3 class="step-title">Dashboard - Your Whole Portfolio at a Glance</h3>
+          <p class="step-body">Once inside, the dashboard is home base - assets, open events, forecast accuracy, and contribution points, all in one modular view.</p>
+          <img class="cs-img" src="../images/economix_dashboard.png" alt="Economix dashboard">
+        </div>
+
+        <div class="execution-step">
+          <p class="step-label">Step 07</p>
+          <h3 class="step-title">Community - Following the Wisdom of the Crowd</h3>
+          <p class="step-body">Users follow top raters and forecasters, see leaderboards ranked by real accuracy and ROI, and grow their own reputation as their followers grow.</p>
+
+          <div class="browser-frame browser-frame--discovery">
+            <div class="browser-frame-bar"><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-url">economix.io/community</span><span class="browser-frame-hint">↕ Scroll, or click to expand</span></div>
+            <div class="browser-frame-scroll browser-frame-scroll--discovery-desktop"><img class="pan-trigger" src="../images/economix_community.png" alt="Economix community page"></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 05 Results -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">05</span>
+          <span class="cs-section-title">Scope &amp; Delivery</span>
+        </div>
+        <h2 class="cs-h2">What shipped</h2>
+        <div class="metrics-grid">
+          <div class="metric"><p class="metric-value" style="display:inline-flex; align-items:center; gap:10px;">0<svg width="52" height="24" viewBox="0 0 52 24" fill="none" style="flex-shrink:0;"><line x1="0" y1="12" x2="40" y2="12" stroke="currentColor" stroke-width="1"/><polyline points="30,2 41,12 30,22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>1</p><p class="metric-label">Full product built from the ground up</p></div>
+          <div class="metric"><p class="metric-value">82</p><p class="metric-label">Foundational Components in the Design System</p></div>
+          <div class="metric"><p class="metric-value">7</p><p class="metric-label">End-to-End User Flows</p></div>
+          <div class="metric"><p class="metric-value">74+</p><p class="metric-label">Production-ready screens, built from 13 reusable layouts</p></div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="cs-nav-footer">
+      <a class="cs-nav-link" href="../totango/" style="--thumb: url('../images/totango_thumb.png')">
+        <span class="cs-nav-direction">← Previous case study</span>
+        <span class="cs-nav-name">Totango</span>
+        <span class="cs-nav-desc">Customer Success SaaS</span>
+      </a>
+      <a class="cs-nav-link next" href="../wizecare/" style="--thumb: url('../images/wizecare_thumb.png')">
+        <span class="cs-nav-direction">Next case study →</span>
+        <span class="cs-nav-name">Wizecare</span>
+        <span class="cs-nav-desc">Digital Health Platform</span>
+      </a>
+    </div>
+
+    <footer>
+      <span style="display:flex;align-items:center;gap:10px;"><img src="../images/lp_logo.svg" alt="Leon Penkovich" class="footer-logo" style="height:20px;width:auto;opacity:0.4;">© 2026 Leon Penkovich · All rights reserved</span>
+      <span>Sr. Product Designer &amp; UX Architect</span>
+    </footer>
+  </div>
+
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">×</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+
+  <div class="pan-overlay" id="pan-overlay">
+    <button class="pan-overlay-close" id="pan-overlay-close">×</button>
+    <div class="pan-overlay-frame" id="pan-overlay-frame">
+      <img class="pan-img" id="pan-overlay-img" src="" alt="" draggable="false">
+      <div class="pan-controls">
+        <button class="pan-btn" id="pan-overlay-zoom-in">+</button>
+        <button class="pan-btn" id="pan-overlay-zoom-out">−</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/chat.js"></script>
+  <script>
+    // Desktop/Mobile toggles - runs after the whole page is parsed, so it
+    // picks up every .device-toggle on the page, not just the first one.
+    document.querySelectorAll('.device-toggle').forEach(function (toggle) {
+      var group = toggle.getAttribute('data-toggle');
+      toggle.querySelectorAll('.device-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var device = btn.getAttribute('data-device');
+          toggle.querySelectorAll('.device-btn').forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+          });
+          document.querySelectorAll('.device-view[data-group="' + group + '"]').forEach(function (v) {
+            v.classList.toggle('active', v.getAttribute('data-device') === device);
+          });
+        });
+      });
+    });
+
+    // Click any screenshot to open it full-size - same lightbox as the real site.
+    var overlay = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.browser-frame-scroll img:not(.pan-trigger), img.cs-img').forEach(function (img) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function () {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function closeLightbox() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeLightbox(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+
+    // Drag-to-pan + zoom - identical implementation to the Wizecare case study,
+    // used only on the Discovery homepage (the one very long, detail-heavy page).
+    function initPanInstance(wrap, img, hint, zoomInId, zoomOutId, initialScale) {
+      if (!wrap || !img) return;
+      var listeners = [];
+      function on(el, ev, fn, opts) { el.addEventListener(ev, fn, opts); listeners.push([el, ev, fn]); }
+
+      var dragging = false, startX, startY, tx = 0, ty = 0, scale = initialScale || 1;
+      var MIN_SCALE = 0.3, MAX_SCALE = 3;
+      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+      function getBounds() {
+        // When the image is narrower than the frame at the current scale
+        // (e.g. a very tall page fit to height leaves empty width), lock X
+        // to the centered position instead of pinning it to the left edge.
+        var w = img.naturalWidth * scale;
+        var minX, maxX;
+        if (w <= wrap.offsetWidth) { minX = maxX = (wrap.offsetWidth - w) / 2; }
+        else { minX = wrap.offsetWidth - w; maxX = 0; }
+        return {
+          minX: minX, maxX: maxX,
+          minY: Math.min(0, wrap.offsetHeight - img.naturalHeight * scale), maxY: 0
+        };
+      }
+      function apply() { img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')'; }
+      function constrain() { var b = getBounds(); tx = clamp(tx, b.minX, b.maxX); ty = clamp(ty, b.minY, b.maxY); }
+      function hideHint() { if (hint) hint.classList.add('hidden'); }
+
+      function centerInitial() {
+        if (!wrap.offsetWidth || !img.naturalWidth) { setTimeout(centerInitial, 50); return; }
+        // Opens showing the whole page at once (fit both dimensions), and
+        // always top-aligned - never starts cropped mid-page.
+        var fitScale = Math.min(wrap.offsetWidth / img.naturalWidth, wrap.offsetHeight / img.naturalHeight);
+        scale = initialScale || fitScale;
+        tx = (wrap.offsetWidth - img.naturalWidth * scale) / 2;
+        ty = 0;
+        constrain();
+        apply();
+      }
+      on(img, 'load', centerInitial);
+      centerInitial();
+
+      on(wrap, 'mousedown', function (e) {
+        dragging = true; startX = e.clientX - tx; startY = e.clientY - ty;
+        wrap.classList.add('is-dragging'); hideHint(); e.preventDefault();
+      });
+      on(document, 'mousemove', function (e) {
+        if (!dragging) return;
+        var b = getBounds();
+        tx = clamp(e.clientX - startX, b.minX, b.maxX);
+        ty = clamp(e.clientY - startY, b.minY, b.maxY);
+        apply();
+      });
+      on(document, 'mouseup', function () { dragging = false; wrap.classList.remove('is-dragging'); });
+
+      on(wrap, 'wheel', function (e) {
+        e.preventDefault();
+        var r = wrap.getBoundingClientRect();
+        var mx = e.clientX - r.left, my = e.clientY - r.top;
+        var ns = clamp(scale * (e.deltaY > 0 ? 0.9 : 1.1), MIN_SCALE, MAX_SCALE);
+        var ratio = ns / scale;
+        tx = mx - (mx - tx) * ratio; ty = my - (my - ty) * ratio; scale = ns;
+        constrain(); apply(); hideHint();
+      }, { passive: false });
+
+      on(wrap, 'touchstart', function (e) {
+        if (e.target.closest('.pan-btn')) return;
+        if (e.touches.length === 1) {
+          var t = e.touches[0]; dragging = true;
+          startX = t.clientX - tx; startY = t.clientY - ty; hideHint();
+        }
+        e.preventDefault();
+      }, { passive: false });
+      on(document, 'touchmove', function (e) {
+        if (!dragging || e.touches.length !== 1) return;
+        var t = e.touches[0], b = getBounds();
+        tx = clamp(t.clientX - startX, b.minX, b.maxX);
+        ty = clamp(t.clientY - startY, b.minY, b.maxY);
+        apply();
+      });
+      on(document, 'touchend', function () { dragging = false; });
+
+      function zoomBtn(delta) {
+        var cx = wrap.offsetWidth / 2, cy = wrap.offsetHeight / 2;
+        var ns = clamp(scale * delta, MIN_SCALE, MAX_SCALE), ratio = ns / scale;
+        tx = cx - (cx - tx) * ratio; ty = cy - (cy - ty) * ratio; scale = ns;
+        constrain(); apply();
+      }
+      var ziEl = document.getElementById(zoomInId), zoEl = document.getElementById(zoomOutId);
+      if (ziEl) on(ziEl, 'click', function () { zoomBtn(1.25); });
+      if (zoEl) on(zoEl, 'click', function () { zoomBtn(0.8); });
+
+      return { destroy: function () { listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2]); }); } };
+    }
+
+    function initPan(wrapId, imgId, hintId, zoomInId, zoomOutId, initialScale) {
+      var wrap = document.getElementById(wrapId);
+      var img = document.getElementById(imgId);
+      var hint = document.getElementById(hintId);
+      initPanInstance(wrap, img, hint, zoomInId, zoomOutId, initialScale);
+    }
+
+    (function () {
+      var panOverlay = document.getElementById('pan-overlay');
+      var panOverlayFrame = document.getElementById('pan-overlay-frame');
+      var panOverlayImg = document.getElementById('pan-overlay-img');
+      var overlayPan = null;
+
+      function openPanOverlay(src) {
+        panOverlayImg.src = src;
+        panOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        panOverlayImg.style.transform = '';
+        if (overlayPan) overlayPan.destroy();
+        overlayPan = initPanInstance(panOverlayFrame, panOverlayImg, null, 'pan-overlay-zoom-in', 'pan-overlay-zoom-out');
+      }
+      function closePanOverlay() {
+        panOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('pan-overlay-close').addEventListener('click', closePanOverlay);
+      panOverlay.addEventListener('click', function (e) { if (e.target === panOverlay) closePanOverlay(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panOverlay.classList.contains('open')) closePanOverlay(); });
+
+      // works for any expand trigger - reads the image straight off its src,
+      // so it doesn't depend on being inside a .pan-wrap (Discovery's inline
+      // view is a plain scroll box; drag/zoom only exists in this overlay).
+      document.querySelectorAll('.pan-btn--expand').forEach(function (btn) {
+        btn.addEventListener('click', function () { openPanOverlay(btn.dataset.src); });
+      });
+      document.querySelectorAll('.pan-trigger').forEach(function (img) {
+        img.addEventListener('click', function () { openPanOverlay(img.src); });
+      });
+    })();
+  </script>
+</body>
+</html>
