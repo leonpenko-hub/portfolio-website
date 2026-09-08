@@ -38,6 +38,21 @@
     }
 
     .case-card:hover { opacity: 0.75; }
+    .case-card--soon { cursor: default; }
+    .case-card--soon:hover { opacity: 1; }
+    .case-card-thumb-wrap { overflow: hidden; }
+    .case-card--soon .case-card-thumb { filter: grayscale(10%) brightness(0.9) blur(3px); transform: scale(1.08); }
+    .case-card--soon:hover .case-card-thumb { filter: grayscale(0%) brightness(1); transform: scale(1.08); }
+    body.light .case-card--soon .case-card-thumb { filter: grayscale(5%) brightness(1) blur(3px); transform: scale(1.08); }
+    body.light .case-card--soon:hover .case-card-thumb { filter: grayscale(5%) brightness(1); transform: scale(1.08); }
+
+    .case-card-thumb-tint {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+    body.light .case-card-thumb-tint { background: rgba(255, 255, 255, 0.5); }
 
     .case-card-thumb {
       width: 100%;
@@ -51,6 +66,23 @@
 
     body.light .case-card-thumb { filter: grayscale(5%) brightness(1); }
     .case-card:hover .case-card-thumb { filter: grayscale(0%) brightness(1); }
+
+    .case-card-thumb-wrap { position: relative; }
+    .coming-soon-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.3px;
+      padding: 10px 26px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
     .case-card-body {
       padding: 24px;
@@ -234,6 +266,25 @@
             </div>
           </div>
         </a>
+
+        <div class="case-card case-card--soon">
+          <div class="case-card-thumb-wrap">
+            <img class="case-card-thumb" src="images/moe_thumb.png" alt="MOE - Israeli Ministry of Education student app UI, coming soon">
+            <div class="case-card-thumb-tint"></div>
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
+          <div class="case-card-body">
+            <p class="case-card-company">External Student Mobile App (Israel MOE)</p>
+            <p class="case-card-desc">Ministry of Education - Student Exam &amp; Progress App</p>
+            <div class="case-card-footer">
+              <div class="case-card-tags">
+                <span class="tag">UX Architecture</span>
+                <span class="tag">Design Management</span>
+                <span class="tag">UX Research</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
